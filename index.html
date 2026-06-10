@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Community | 自分の居場所をつくるコミュニティ</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Hiragino Sans", "Yu Gothic", sans-serif;
+      background: #fff8f1;
+      color: #333;
+      line-height: 1.8;
+    }
+
+    header {
+      padding: 20px 8%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #fff;
+      border-bottom: 1px solid #f1dfd2;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #8b5e3c;
+    }
+
+    nav a {
+      margin-left: 20px;
+      text-decoration: none;
+      color: #6b4b35;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 90px 8% 70px;
+      text-align: center;
+      background: linear-gradient(180deg, #fff3e6 0%, #fff8f1 100%);
+    }
+
+    .hero h1 {
+      font-size: 42px;
+      margin-bottom: 20px;
+      color: #4a2f21;
+      line-height: 1.4;
+    }
+
+    .hero p {
+      font-size: 18px;
+      max-width: 680px;
+      margin: 0 auto 32px;
+      color: #6b5548;
+    }
+
+    .button {
+      display: inline-block;
+      padding: 14px 34px;
+      background: #d98c5f;
+      color: #fff;
+      border-radius: 999px;
+      text-decoration: none;
+      font-weight: bold;
+      box-shadow: 0 8px 20px rgba(217, 140, 95, 0.25);
+    }
+
+    .section {
+      padding: 70px 8%;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .section h2 {
+      text-align: center;
+      font-size: 30px;
+      color: #4a2f21;
+      margin-bottom: 40px;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .card {
+      background: #fff;
+      padding: 30px;
+      border-radius: 22px;
+      box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
+      border: 1px solid #f1dfd2;
+    }
+
+    .card h3 {
+      font-size: 20px;
+      margin-bottom: 12px;
+      color: #8b5e3c;
+    }
+
+    .card p {
+      font-size: 15px;
+      color: #5f5149;
+    }
+
+    .world {
+      background: #fff;
+      border-radius: 28px;
+      padding: 45px;
+      text-align: center;
+      border: 1px solid #f1dfd2;
+      box-shadow: 0 10px 28px rgba(90, 60, 40, 0.07);
+    }
+
+    .world p {
+      max-width: 720px;
+      margin: 0 auto;
+      color: #5f5149;
+    }
+
+    footer {
+      text-align: center;
+      padding: 35px 8%;
+      color: #8b7a6f;
+      font-size: 13px;
+    }
+
+    @media (max-width: 768px) {
+      header {
+        padding: 16px 5%;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 70px 5% 55px;
+      }
+
+      .hero h1 {
+        font-size: 30px;
+      }
+
+      .hero p {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 55px 5%;
+      }
+
+      .cards {
+        grid-template-columns: 1fr;
+      }
+
+      .world {
+        padding: 30px 22px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">Community</div>
+    <nav>
+      <a href="#about">この場所について</a>
+      <a href="#features">できること</a>
+      <a href="#world">世界観</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h1>本来の自分でいられる<br>小さな居場所をつくろう</h1>
+    <p>
+      Communityは、オープンな話題を気軽に話せる場所。
+      自分の部屋を持つように、少しずつ居場所を育てていくコミュニティです。
+    </p>
+    <a href="#features" class="button">どんな場所か見る</a>
+  </section>
+
+  <section class="section" id="about">
+    <h2>このコミュニティについて</h2>
+    <div class="world">
+      <p>
+        誰かに合わせすぎなくてもいい。  
+        でも、ひとりじゃない。  
+        そんな距離感で、好きな話題を話したり、同じ価値観の人とつながったり、
+        自分だけの小さな家や部屋を持てるような場所を目指しています。
+      </p>
+    </div>
+  </section>
+
+  <section class="section" id="features">
+    <h2>できること</h2>
+    <div class="cards">
+      <div class="card">
+        <h3>気軽に話せる</h3>
+        <p>
+          日常のこと、好きなこと、誰かに聞いてほしいことを自由に投稿できます。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>自分の部屋を持てる</h3>
+        <p>
+          プロフィールやマイルームを作って、自分らしい居場所を育てられます。
+        </p>
+      </div>
+
+      <div class="card">
+        <h3>安心してつながれる</h3>
+        <p>
+          通報・ブロック・管理機能を用意し、安心して使える空間を目指します。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="world">
+    <h2>目指す世界観</h2>
+    <div class="world">
+      <p>
+        昔のオンライン村のように、ただ投稿するだけではなく、
+        自分の家を持ったり、誰かの部屋を訪ねたり、ゆるく交流できる世界。
+        話すことが目的でも、ただそこにいるだけでもいい。
+        そんなコミュニティを少しずつ作っていきます。
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    © 2026 Community. All rights reserved.
+  </footer>
+</body>
+</html>
