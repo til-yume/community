@@ -20,15 +20,16 @@
     }
 
     header {
-      padding: 20px 8%;
+      padding: 18px 8%;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: #fff;
+      background: rgba(255, 255, 255, 0.92);
       border-bottom: 1px solid #f1dfd2;
       position: sticky;
       top: 0;
       z-index: 10;
+      backdrop-filter: blur(10px);
     }
 
     .logo {
@@ -48,7 +49,21 @@
     .hero {
       padding: 90px 8% 70px;
       text-align: center;
-      background: linear-gradient(180deg, #fff3e6 0%, #fff8f1 100%);
+      background:
+        radial-gradient(circle at top left, #ffe2c6 0%, transparent 32%),
+        linear-gradient(180deg, #fff3e6 0%, #fff8f1 100%);
+    }
+
+    .hero-badge {
+      display: inline-block;
+      padding: 6px 16px;
+      border-radius: 999px;
+      background: #fff;
+      color: #9a6743;
+      font-size: 13px;
+      font-weight: bold;
+      margin-bottom: 18px;
+      border: 1px solid #f1dfd2;
     }
 
     .hero h1 {
@@ -60,7 +75,7 @@
 
     .hero p {
       font-size: 18px;
-      max-width: 680px;
+      max-width: 720px;
       margin: 0 auto 32px;
       color: #6b5548;
     }
@@ -78,7 +93,7 @@
 
     .section {
       padding: 70px 8%;
-      max-width: 1100px;
+      max-width: 1120px;
       margin: 0 auto;
     }
 
@@ -86,47 +101,127 @@
       text-align: center;
       font-size: 30px;
       color: #4a2f21;
+      margin-bottom: 14px;
+    }
+
+    .section-lead {
+      text-align: center;
+      color: #7a6253;
       margin-bottom: 40px;
     }
 
-    .cards {
+    .village-map {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .map-card {
+      background: #fff;
+      padding: 24px;
+      border-radius: 24px;
+      border: 1px solid #f1dfd2;
+      box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
+      text-align: center;
+    }
+
+    .map-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .map-card h3 {
+      color: #8b5e3c;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .map-card p {
+      font-size: 14px;
+      color: #66554a;
+    }
+
+    .posts {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
 
-    .card {
+    .post-card {
       background: #fff;
-      padding: 30px;
-      border-radius: 22px;
-      box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
+      border-radius: 24px;
+      padding: 24px;
       border: 1px solid #f1dfd2;
+      box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
     }
 
-    .card h3 {
-      font-size: 20px;
+    .post-tag {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 999px;
+      background: #fff1e6;
+      color: #b8754a;
+      font-size: 12px;
+      font-weight: bold;
       margin-bottom: 12px;
-      color: #8b5e3c;
     }
 
-    .card p {
-      font-size: 15px;
-      color: #5f5149;
+    .post-card h3 {
+      font-size: 18px;
+      color: #4a2f21;
+      margin-bottom: 10px;
     }
 
-    .world {
+    .post-card p {
+      color: #66554a;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+
+    .post-meta {
+      font-size: 12px;
+      color: #9a887c;
+    }
+
+    .room {
       background: #fff;
-      border-radius: 28px;
-      padding: 45px;
-      text-align: center;
+      border-radius: 30px;
+      padding: 42px;
       border: 1px solid #f1dfd2;
       box-shadow: 0 10px 28px rgba(90, 60, 40, 0.07);
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 30px;
+      align-items: center;
     }
 
-    .world p {
-      max-width: 720px;
-      margin: 0 auto;
-      color: #5f5149;
+    .room h3 {
+      color: #4a2f21;
+      font-size: 26px;
+      margin-bottom: 14px;
+    }
+
+    .room p {
+      color: #66554a;
+    }
+
+    .room-preview {
+      background: #fff8f1;
+      border: 1px dashed #d9a47f;
+      border-radius: 26px;
+      padding: 26px;
+      text-align: center;
+    }
+
+    .room-preview .house {
+      font-size: 60px;
+      margin-bottom: 8px;
+    }
+
+    .room-preview strong {
+      display: block;
+      color: #8b5e3c;
+      margin-bottom: 6px;
     }
 
     footer {
@@ -136,17 +231,15 @@
       font-size: 13px;
     }
 
-    @media (max-width: 768px) {
-      header {
-        padding: 16px 5%;
+    @media (max-width: 900px) {
+      .village-map,
+      .posts,
+      .room {
+        grid-template-columns: 1fr;
       }
 
       nav {
         display: none;
-      }
-
-      .hero {
-        padding: 70px 5% 55px;
       }
 
       .hero h1 {
@@ -156,18 +249,6 @@
       .hero p {
         font-size: 16px;
       }
-
-      .section {
-        padding: 55px 5%;
-      }
-
-      .cards {
-        grid-template-columns: 1fr;
-      }
-
-      .world {
-        padding: 30px 22px;
-      }
     }
   </style>
 </head>
@@ -176,68 +257,105 @@
   <header>
     <div class="logo">Community</div>
     <nav>
-      <a href="#about">この場所について</a>
-      <a href="#features">できること</a>
-      <a href="#world">世界観</a>
+      <a href="#map">村マップ</a>
+      <a href="#posts">みんなの投稿</a>
+      <a href="#room">自分の部屋</a>
     </nav>
   </header>
 
   <section class="hero">
+    <div class="hero-badge">まだ名前のない、小さなオンライン村</div>
     <h1>本来の自分でいられる<br>小さな居場所をつくろう</h1>
     <p>
       Communityは、オープンな話題を気軽に話せる場所。
-      自分の部屋を持つように、少しずつ居場所を育てていくコミュニティです。
+      自分の家や部屋を持つように、少しずつ居場所を育てていくコミュニティです。
     </p>
-    <a href="#features" class="button">どんな場所か見る</a>
+    <a href="#posts" class="button">村をのぞいてみる</a>
   </section>
 
-  <section class="section" id="about">
-    <h2>このコミュニティについて</h2>
-    <div class="world">
-      <p>
-        誰かに合わせすぎなくてもいい。  
-        でも、ひとりじゃない。  
-        そんな距離感で、好きな話題を話したり、同じ価値観の人とつながったり、
-        自分だけの小さな家や部屋を持てるような場所を目指しています。
-      </p>
-    </div>
-  </section>
+  <section class="section" id="map">
+    <h2>村マップ</h2>
+    <p class="section-lead">まずは、こんな場所があるコミュニティを目指します。</p>
 
-  <section class="section" id="features">
-    <h2>できること</h2>
-    <div class="cards">
-      <div class="card">
-        <h3>気軽に話せる</h3>
-        <p>
-          日常のこと、好きなこと、誰かに聞いてほしいことを自由に投稿できます。
-        </p>
+    <div class="village-map">
+      <div class="map-card">
+        <div class="map-icon">🏠</div>
+        <h3>自分の部屋</h3>
+        <p>プロフィールや好きなものを置ける、自分だけの居場所。</p>
       </div>
 
-      <div class="card">
-        <h3>自分の部屋を持てる</h3>
-        <p>
-          プロフィールやマイルームを作って、自分らしい居場所を育てられます。
-        </p>
+      <div class="map-card">
+        <div class="map-icon">📝</div>
+        <h3>村の掲示板</h3>
+        <p>日常のこと、相談、雑談をゆるく投稿できる場所。</p>
       </div>
 
-      <div class="card">
-        <h3>安心してつながれる</h3>
-        <p>
-          通報・ブロック・管理機能を用意し、安心して使える空間を目指します。
-        </p>
+      <div class="map-card">
+        <div class="map-icon">☕</div>
+        <h3>休憩所</h3>
+        <p>ただ眺めるだけでもいい、気軽に立ち寄れる空間。</p>
+      </div>
+
+      <div class="map-card">
+        <div class="map-icon">🌙</div>
+        <h3>夜のひとこと</h3>
+        <p>誰かに聞いてほしい気持ちを、そっと置ける場所。</p>
       </div>
     </div>
   </section>
 
-  <section class="section" id="world">
-    <h2>目指す世界観</h2>
-    <div class="world">
-      <p>
-        昔のオンライン村のように、ただ投稿するだけではなく、
-        自分の家を持ったり、誰かの部屋を訪ねたり、ゆるく交流できる世界。
-        話すことが目的でも、ただそこにいるだけでもいい。
-        そんなコミュニティを少しずつ作っていきます。
-      </p>
+  <section class="section" id="posts">
+    <h2>みんなの投稿</h2>
+    <p class="section-lead">実際には、ここにユーザーの投稿が並ぶイメージです。</p>
+
+    <div class="posts">
+      <div class="post-card">
+        <span class="post-tag">雑談</span>
+        <h3>今日ちょっと嬉しかったこと</h3>
+        <p>
+          いつもより少し早く起きられた。小さいことだけど、今日はいい日になりそう。
+        </p>
+        <div class="post-meta">♡ 12　💬 3　by まちの住人</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-tag">相談</span>
+        <h3>自分らしさって何だろう</h3>
+        <p>
+          人に合わせすぎて、たまに自分が何を好きなのかわからなくなる。
+        </p>
+        <div class="post-meta">♡ 28　💬 9　by 旅人</div>
+      </div>
+
+      <div class="post-card">
+        <span class="post-tag">好きなもの</span>
+        <h3>夜に聴きたい曲を集めたい</h3>
+        <p>
+          静かな夜に合う曲を、みんなで少しずつ持ち寄る場所がほしい。
+        </p>
+        <div class="post-meta">♡ 19　💬 5　by 音楽好き</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="room">
+    <h2>自分の部屋</h2>
+    <p class="section-lead">ただのプロフィールではなく、自分の居場所として育てるイメージ。</p>
+
+    <div class="room">
+      <div>
+        <h3>マイルーム機能</h3>
+        <p>
+          自己紹介、好きな話題、今の気分、集めたバッジなどを置ける場所。
+          夢里村のように、自分の家を持つ楽しさをコミュニティに入れていきます。
+        </p>
+      </div>
+
+      <div class="room-preview">
+        <div class="house">🏡</div>
+        <strong>あなたの小さな部屋</strong>
+        <p>好きなもの・話したいこと・今の気分を飾れる場所</p>
+      </div>
     </div>
   </section>
 
