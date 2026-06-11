@@ -353,23 +353,6 @@
       font-size: 13px;
     }
 
-    .report-button {
-  margin-top: 14px;
-  margin-right: 8px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 999px;
-  background: #fff6e8;
-  color: #9a6743;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.report-button:hover {
-  background: #f7dfbd;
-}
-    
     .like-button:hover {
       background: #f6d8c2;
     }
@@ -607,87 +590,132 @@
       border: 1px solid #f1dfd2;
     }
 
+
+
+    .report-button,
+    .comment-report-button,
+    .report-done-button,
+    .report-delete-button {
+      border: none;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    .report-button {
+      margin-top: 14px;
+      margin-right: 8px;
+      padding: 8px 14px;
+      background: #fff6e8;
+      color: #9a6743;
+      font-size: 12px;
+    }
+
+    .report-button:hover,
+    .comment-report-button:hover,
+    .report-done-button:hover,
+    .report-delete-button:hover {
+      opacity: 0.9;
+    }
+
+    .comment-actions {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      flex-shrink: 0;
+    }
+
+    .comment-report-button {
+      padding: 5px 10px;
+      background: #fff6e8;
+      color: #9a6743;
+      font-size: 11px;
+    }
+
+    .admin-box {
+      background: #fff;
+      border-radius: 30px;
+      padding: 30px;
+      border: 1px solid #f1dfd2;
+      box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .admin-box h3 {
+      text-align: center;
+      color: #4a2f21;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .reports-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .report-card {
+      background: #fff8f1;
+      border: 1px solid #f1dfd2;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .report-card h4 {
+      color: #4a2f21;
+      font-size: 16px;
+      margin-bottom: 8px;
+    }
+
+    .report-card p {
+      color: #66554a;
+      font-size: 13px;
+      margin-bottom: 6px;
+      white-space: pre-wrap;
+    }
+
+    .report-status {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: #fff1e6;
+      color: #b8754a;
+      font-size: 12px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .report-done-button {
+      margin-top: 10px;
+      margin-right: 8px;
+      padding: 8px 14px;
+      background: #d98c5f;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .report-delete-button {
+      margin-top: 10px;
+      padding: 8px 14px;
+      background: #c94c4c;
+      color: #fff;
+      font-size: 12px;
+    }
+
+    .empty-reports {
+      text-align: center;
+      color: #9a887c;
+      font-size: 14px;
+    }
+
+
     footer {
       text-align: center;
       padding: 35px 8%;
       color: #8b7a6f;
       font-size: 13px;
     }
-
-    .admin-box {
-  background: #fff;
-  border-radius: 30px;
-  padding: 30px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.admin-box h3 {
-  text-align: center;
-  color: #4a2f21;
-  font-size: 22px;
-  margin-bottom: 18px;
-}
-
-.reports-list {
-  display: grid;
-  gap: 14px;
-}
-
-.report-card {
-  background: #fff8f1;
-  border: 1px solid #f1dfd2;
-  border-radius: 18px;
-  padding: 18px;
-}
-
-.report-card h4 {
-  color: #4a2f21;
-  font-size: 16px;
-  margin-bottom: 8px;
-}
-
-.report-card p {
-  color: #66554a;
-  font-size: 13px;
-  margin-bottom: 6px;
-}
-
-.report-status {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 999px;
-  background: #fff1e6;
-  color: #b8754a;
-  font-size: 12px;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.report-done-button {
-  margin-top: 10px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 999px;
-  background: #d98c5f;
-  color: #fff;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.report-done-button:hover {
-  opacity: 0.9;
-}
-
-.empty-reports {
-  text-align: center;
-  color: #9a887c;
-  font-size: 14px;
-}
-    
 
     @media (max-width: 900px) {
       header {
@@ -918,21 +946,22 @@
     </div>
   </section>
 
-  <section class="section admin-section" id="adminPanel" style="display: none;">
-  <h2>管理画面</h2>
-  <p class="section-lead">管理者だけが通報内容を確認できます。</p>
 
-  <div class="admin-box">
-    <h3>通報一覧</h3>
-    <div class="reports-list" id="reportsList">
-      <p class="empty-reports">通報はまだありません。</p>
+  <section class="section admin-section" id="adminPanel" style="display: none;">
+    <h2>管理画面</h2>
+    <p class="section-lead">管理者だけが通報内容を確認できます。</p>
+
+    <div class="admin-box">
+      <h3>通報一覧</h3>
+      <div class="reports-list" id="reportsList">
+        <p class="empty-reports">通報はまだありません。</p>
+      </div>
     </div>
-  </div>
-</section>
-  
+  </section>
+
   <footer>
     © 2026 Community. All rights reserved.
- </footer>
+  </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -978,9 +1007,11 @@
     let currentProfile = null;
     let allPosts = [];
     let currentVisitedUserId = null;
+    let reportsUnsubscribe = null;
 
+    // ★管理者メールアドレス。必要に応じて自分のログインメールに変更
     const ADMIN_EMAILS = ["tanu2.com@icloud.com"];
-    
+
     const postList = document.getElementById("postList");
     const errorMessage = document.getElementById("errorMessage");
     const emailInput = document.getElementById("emailInput");
@@ -993,6 +1024,7 @@
     const bioInput = document.getElementById("bioInput");
     const profileMessage = document.getElementById("profileMessage");
     const roomsList = document.getElementById("roomsList");
+    const reportsList = document.getElementById("reportsList");
 
     function showError(message) {
       errorMessage.style.display = "block";
@@ -1009,9 +1041,9 @@
     }
 
     function isAdmin() {
-  return currentUser && ADMIN_EMAILS.includes(currentUser.email);
-}
-    
+      return Boolean(currentUser && ADMIN_EMAILS.includes(currentUser.email));
+    }
+
     function createPostCard(post, postId) {
       const postCard = document.createElement("div");
       postCard.className = "post-card";
@@ -1067,54 +1099,54 @@
       };
 
       const reportButton = document.createElement("button");
-reportButton.textContent = "通報";
-reportButton.className = "report-button";
+      reportButton.textContent = "通報";
+      reportButton.className = "report-button";
+      reportButton.onclick = async () => {
+        if (!currentUser) {
+          alert("通報するにはログインしてください。");
+          return;
+        }
 
-reportButton.onclick = async () => {
-  if (!currentUser) {
-    alert("通報するにはログインしてください。");
-    return;
-  }
+        const reason = prompt("通報理由を入力してください。");
 
-  const reason = prompt("通報理由を入力してください。");
+        if (!reason || reason.trim() === "") {
+          return;
+        }
 
-  if (!reason || reason.trim() === "") {
-    return;
-  }
+        await addDoc(collection(db, "reports"), {
+          type: "post",
+          postId,
+          postTitle: post.title || "",
+          postBody: post.body || "",
+          postAuthor: post.author || "",
+          postUserId: post.userId || "",
+          reportedBy: currentUser.uid,
+          reporterEmail: currentUser.email,
+          reason: reason.trim(),
+          status: "未対応",
+          createdAt: serverTimestamp()
+        });
 
-  await addDoc(collection(db, "reports"), {
-    type: "post",
-    postId: postId,
-    postTitle: post.title || "",
-    postBody: post.body || "",
-    postAuthor: post.author || "",
-    reportedBy: currentUser.uid,
-    reporterEmail: currentUser.email,
-    reason: reason.trim(),
-    status: "未対応",
-    createdAt: serverTimestamp()
-  });
+        alert("通報を受け付けました。");
+      };
 
-  alert("通報を受け付けました。");
-};
-      
       const commentBox = createCommentBox(postId);
 
-postCard.appendChild(tag);
-postCard.appendChild(title);
-postCard.appendChild(body);
-postCard.appendChild(meta);
-postCard.appendChild(likeButton);
+      postCard.appendChild(tag);
+      postCard.appendChild(title);
+      postCard.appendChild(body);
+      postCard.appendChild(meta);
+      postCard.appendChild(likeButton);
 
-if (currentUser) {
-  postCard.appendChild(reportButton);
-}
+      if (currentUser) {
+        postCard.appendChild(reportButton);
+      }
 
-if (currentUser && post.userId === currentUser.uid) {
-  postCard.appendChild(deleteButton);
-}
+      if (currentUser && post.userId === currentUser.uid) {
+        postCard.appendChild(deleteButton);
+      }
 
-postCard.appendChild(commentBox);
+      postCard.appendChild(commentBox);
 
       return postCard;
     }
@@ -1187,7 +1219,40 @@ postCard.appendChild(commentBox);
           const commentText = document.createElement("span");
           commentText.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
 
-          commentItem.appendChild(commentText);
+          const commentActions = document.createElement("div");
+          commentActions.className = "comment-actions";
+
+          if (currentUser) {
+            const commentReportButton = document.createElement("button");
+            commentReportButton.textContent = "通報";
+            commentReportButton.className = "comment-report-button";
+
+            commentReportButton.onclick = async () => {
+              const reason = prompt("コメントの通報理由を入力してください。");
+
+              if (!reason || reason.trim() === "") {
+                return;
+              }
+
+              await addDoc(collection(db, "reports"), {
+                type: "comment",
+                postId,
+                commentId: docSnap.id,
+                commentText: comment.text || "",
+                commentAuthor: comment.author || "",
+                commentUserId: comment.userId || "",
+                reportedBy: currentUser.uid,
+                reporterEmail: currentUser.email,
+                reason: reason.trim(),
+                status: "未対応",
+                createdAt: serverTimestamp()
+              });
+
+              alert("コメントの通報を受け付けました。");
+            };
+
+            commentActions.appendChild(commentReportButton);
+          }
 
           if (currentUser && comment.userId === currentUser.uid) {
             const commentDeleteButton = document.createElement("button");
@@ -1204,7 +1269,13 @@ postCard.appendChild(commentBox);
               await deleteDoc(doc(db, "posts", postId, "comments", docSnap.id));
             };
 
-            commentItem.appendChild(commentDeleteButton);
+            commentActions.appendChild(commentDeleteButton);
+          }
+
+          commentItem.appendChild(commentText);
+
+          if (commentActions.children.length > 0) {
+            commentItem.appendChild(commentActions);
           }
 
           commentList.appendChild(commentItem);
@@ -1514,6 +1585,158 @@ postCard.appendChild(commentBox);
       });
     }
 
+
+
+    function toggleAdminPanel() {
+      const adminPanel = document.getElementById("adminPanel");
+
+      if (!adminPanel) {
+        return;
+      }
+
+      if (isAdmin()) {
+        adminPanel.style.display = "block";
+        loadReports();
+      } else {
+        adminPanel.style.display = "none";
+
+        if (reportsUnsubscribe) {
+          reportsUnsubscribe();
+          reportsUnsubscribe = null;
+        }
+      }
+    }
+
+    function loadReports() {
+      if (!isAdmin()) {
+        return;
+      }
+
+      if (reportsUnsubscribe) {
+        reportsUnsubscribe();
+      }
+
+      const reportsQuery = query(
+        collection(db, "reports"),
+        orderBy("createdAt", "desc")
+      );
+
+      reportsUnsubscribe = onSnapshot(reportsQuery, (snapshot) => {
+        reportsList.innerHTML = "";
+
+        if (snapshot.empty) {
+          reportsList.innerHTML = `<p class="empty-reports">通報はまだありません。</p>`;
+          return;
+        }
+
+        snapshot.forEach((docSnap) => {
+          const report = docSnap.data();
+          const reportCard = document.createElement("div");
+          reportCard.className = "report-card";
+
+          const status = document.createElement("span");
+          status.className = "report-status";
+          status.textContent = report.status || "未対応";
+
+          const title = document.createElement("h4");
+          title.textContent = report.type === "comment"
+            ? "通報対象：コメント"
+            : `通報対象：${report.postTitle || "無題の投稿"}`;
+
+          const reason = document.createElement("p");
+          reason.textContent = `理由：${report.reason || ""}`;
+
+          const targetAuthor = document.createElement("p");
+          targetAuthor.textContent = report.type === "comment"
+            ? `コメント投稿者：${report.commentAuthor || "不明"}`
+            : `投稿者：${report.postAuthor || "不明"}`;
+
+          const reporter = document.createElement("p");
+          reporter.textContent = `通報者：${report.reporterEmail || "不明"}`;
+
+          const body = document.createElement("p");
+          body.textContent = report.type === "comment"
+            ? `コメント内容：${report.commentText || ""}`
+            : `投稿内容：${report.postBody || ""}`;
+
+          reportCard.appendChild(status);
+          reportCard.appendChild(title);
+          reportCard.appendChild(reason);
+          reportCard.appendChild(targetAuthor);
+          reportCard.appendChild(reporter);
+          reportCard.appendChild(body);
+
+          if (report.status !== "対応済み" && report.status !== "投稿削除済み" && report.status !== "コメント削除済み") {
+            const doneButton = document.createElement("button");
+            doneButton.className = "report-done-button";
+            doneButton.textContent = "対応済みにする";
+
+            doneButton.onclick = async () => {
+              await updateDoc(doc(db, "reports", docSnap.id), {
+                status: "対応済み",
+                handledAt: serverTimestamp()
+              });
+            };
+
+            reportCard.appendChild(doneButton);
+          }
+
+          if (report.type === "post" && report.postId && report.status !== "投稿削除済み") {
+            const deletePostButton = document.createElement("button");
+            deletePostButton.className = "report-delete-button";
+            deletePostButton.textContent = "投稿を削除する";
+
+            deletePostButton.onclick = async () => {
+              const result = confirm("この通報対象の投稿を削除しますか？");
+
+              if (!result) {
+                return;
+              }
+
+              await deleteDoc(doc(db, "posts", report.postId));
+
+              await updateDoc(doc(db, "reports", docSnap.id), {
+                status: "投稿削除済み",
+                handledAt: serverTimestamp()
+              });
+
+              alert("投稿を削除しました。");
+            };
+
+            reportCard.appendChild(deletePostButton);
+          }
+
+          if (report.type === "comment" && report.postId && report.commentId && report.status !== "コメント削除済み") {
+            const deleteCommentButton = document.createElement("button");
+            deleteCommentButton.className = "report-delete-button";
+            deleteCommentButton.textContent = "コメントを削除する";
+
+            deleteCommentButton.onclick = async () => {
+              const result = confirm("この通報対象のコメントを削除しますか？");
+
+              if (!result) {
+                return;
+              }
+
+              await deleteDoc(doc(db, "posts", report.postId, "comments", report.commentId));
+
+              await updateDoc(doc(db, "reports", docSnap.id), {
+                status: "コメント削除済み",
+                handledAt: serverTimestamp()
+              });
+
+              alert("コメントを削除しました。");
+            };
+
+            reportCard.appendChild(deleteCommentButton);
+          }
+
+          reportsList.appendChild(reportCard);
+        });
+      });
+    }
+
+
     onSnapshot(collection(db, "users"), (snapshot) => {
       roomsList.innerHTML = "";
 
@@ -1529,93 +1752,6 @@ postCard.appendChild(commentBox);
       });
     });
 
-    function toggleAdminPanel() {
-  const adminPanel = document.getElementById("adminPanel");
-
-  if (!adminPanel) {
-    return;
-  }
-
-  if (isAdmin()) {
-    adminPanel.style.display = "block";
-    loadReports();
-  } else {
-    adminPanel.style.display = "none";
-  }
-}
-
-function loadReports() {
-  if (!isAdmin()) {
-    return;
-  }
-
-  const reportsList = document.getElementById("reportsList");
-
-  const reportsQuery = query(
-    collection(db, "reports"),
-    orderBy("createdAt", "desc")
-  );
-
-  onSnapshot(reportsQuery, (snapshot) => {
-    reportsList.innerHTML = "";
-
-    if (snapshot.empty) {
-      reportsList.innerHTML = `<p class="empty-reports">通報はまだありません。</p>`;
-      return;
-    }
-
-    snapshot.forEach((docSnap) => {
-      const report = docSnap.data();
-
-      const reportCard = document.createElement("div");
-      reportCard.className = "report-card";
-
-      const status = document.createElement("span");
-      status.className = "report-status";
-      status.textContent = report.status || "未対応";
-
-      const title = document.createElement("h4");
-      title.textContent = `通報対象：${report.postTitle || "無題の投稿"}`;
-
-      const reason = document.createElement("p");
-      reason.textContent = `理由：${report.reason || ""}`;
-
-      const author = document.createElement("p");
-      author.textContent = `投稿者：${report.postAuthor || "不明"}`;
-
-      const reporter = document.createElement("p");
-      reporter.textContent = `通報者：${report.reporterEmail || "不明"}`;
-
-      const body = document.createElement("p");
-      body.textContent = `投稿内容：${report.postBody || ""}`;
-
-      reportCard.appendChild(status);
-      reportCard.appendChild(title);
-      reportCard.appendChild(reason);
-      reportCard.appendChild(author);
-      reportCard.appendChild(reporter);
-      reportCard.appendChild(body);
-
-      if (report.status !== "対応済み") {
-        const doneButton = document.createElement("button");
-        doneButton.className = "report-done-button";
-        doneButton.textContent = "対応済みにする";
-
-        doneButton.onclick = async () => {
-          await updateDoc(doc(db, "reports", docSnap.id), {
-            status: "対応済み",
-            handledAt: serverTimestamp()
-          });
-        };
-
-        reportCard.appendChild(doneButton);
-      }
-
-      reportsList.appendChild(reportCard);
-    });
-  });
-}
-    
     window.signup = signup;
     window.login = login;
     window.logout = logout;
