@@ -746,21 +746,27 @@ function createPostCard(post, postId) {
   const commentButton = document.createElement("button");
   commentButton.textContent = "送信";
   commentButton.className = "comment-button";
-  commentButton.onclick = async () => {
-    const commentText = commentInput.value.trim();
+commentButton.onclick = async () => {
+  if (!currentUser) {
+    alert("コメントするにはログインしてください。");
+    return;
+  }
 
-    if (commentText === "") {
-      return;
-    }
+  const commentText = commentInput.value.trim();
 
-    await addDoc(collection(db, "posts", postId, "comments"), {
-      text: commentText,
-      author: "匿名",
-      createdAt: serverTimestamp()
-    });
+  if (commentText === "") {
+    return;
+  }
 
-    commentInput.value = "";
-  };
+  await addDoc(collection(db, "posts", postId, "comments"), {
+    text: commentText,
+    author: currentUser.email,
+    userId: currentUser.uid,
+    createdAt: serverTimestamp()
+  });
+
+  commentInput.value = "";
+};
 
   commentInputWrap.appendChild(commentInput);
   commentInputWrap.appendChild(commentButton);
