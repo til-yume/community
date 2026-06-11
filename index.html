@@ -788,7 +788,11 @@ onSnapshot(collection(db, "posts", postId, "comments"), (snapshot) => {
   postCard.appendChild(body);
   postCard.appendChild(meta);
   postCard.appendChild(likeButton);
+  
+if (currentUser && post.userId === currentUser.uid) {
   postCard.appendChild(deleteButton);
+}
+  
   postCard.appendChild(commentBox);
 
   return postCard;
