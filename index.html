@@ -678,18 +678,18 @@ function createPostCard(post, postId) {
   commentBox.appendChild(commentInputWrap);
 
 onSnapshot(collection(db, "posts", postId, "comments"), (snapshot) => {
-    commentList.innerHTML = "";
+  commentList.innerHTML = "";
 
-    snapshot.forEach((document) => {
-      const comment = document.data();
+  snapshot.forEach((docSnap) => {
+    const comment = docSnap.data();
 
-      const commentItem = document.createElement("div");
-      commentItem.className = "comment-item";
-      commentItem.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
+    const commentItem = document.createElement("div");
+    commentItem.className = "comment-item";
+    commentItem.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
 
-      commentList.appendChild(commentItem);
-    });
+    commentList.appendChild(commentItem);
   });
+});
 
   postCard.appendChild(tag);
   postCard.appendChild(title);
@@ -710,11 +710,11 @@ const postsQuery = query(
 onSnapshot(postsQuery, (snapshot) => {
   postList.innerHTML = "";
 
-  snapshot.forEach((document) => {
-    const post = document.data();
-    const postCard = createPostCard(post, document.id);
-    postList.appendChild(postCard);
-  });
+snapshot.forEach((docSnap) => {
+  const post = docSnap.data();
+  const postCard = createPostCard(post, docSnap.id);
+  postList.appendChild(postCard);
+});
 });
 
   async function addPost() {
