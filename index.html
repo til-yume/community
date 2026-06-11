@@ -275,6 +275,23 @@
 .delete-button:hover {
   background: #e8c8b5;
 }
+
+    .like-button {
+  margin-top: 14px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #fff1e6;
+  color: #b8754a;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.like-button:hover {
+  background: #f6d8c2;
+}
     
     .room {
       background: #fff;
@@ -500,7 +517,9 @@ import {
   deleteDoc,
   doc,
   query,
-  orderBy
+  orderBy,
+  updateDoc,
+  increment
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -532,9 +551,19 @@ function createPostCard(post, postId) {
   const body = document.createElement("p");
   body.textContent = post.body || "";
 
-  const meta = document.createElement("div");
-  meta.className = "post-meta";
-  meta.textContent = `♡ 0　💬 0　by ${post.author || "匿名"}`;
+const meta = document.createElement("div");
+meta.className = "post-meta";
+meta.textContent = `💬 0　by ${post.author || "匿名"}`;
+
+const likeButton = document.createElement("button");
+likeButton.className = "like-button";
+likeButton.textContent = `♡ ${post.likes || 0}`;
+
+likeButton.onclick = async () => {
+  await updateDoc(doc(db, "posts", postId), {
+    likes: increment(1)
+  });
+};
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "削除";
@@ -549,11 +578,12 @@ function createPostCard(post, postId) {
     await deleteDoc(doc(db, "posts", postId));
   };
 
-  postCard.appendChild(tag);
-  postCard.appendChild(title);
-  postCard.appendChild(body);
-  postCard.appendChild(meta);
-  postCard.appendChild(deleteButton);
+postCard.appendChild(tag);
+postCard.appendChild(title);
+postCard.appendChild(body);
+postCard.appendChild(meta);
+postCard.appendChild(likeButton);
+postCard.appendChild(deleteButton);
 
   return postCard;
 }
@@ -591,13 +621,14 @@ const body = bodyInput.value.trim();
 
     errorMessage.style.display = "none";
 
-    await addDoc(collection(db, "posts"), {
-      title: title,
-      category: category,
-      body: body,
- author: author,
-      createdAt: serverTimestamp()
-    });
+await addDoc(collection(db, "posts"), {
+  title: title,
+  category: category,
+  body: body,
+  author: author,
+  likes: 0,
+  createdAt: serverTimestamp()
+});
 
     titleInput.value = "";
     bodyInput.value = "";
