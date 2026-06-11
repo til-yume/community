@@ -677,12 +677,7 @@ function createPostCard(post, postId) {
   commentBox.appendChild(commentList);
   commentBox.appendChild(commentInputWrap);
 
-  const commentsQuery = query(
-    collection(db, "posts", postId, "comments"),
-    orderBy("createdAt", "asc")
-  );
-
-  onSnapshot(commentsQuery, (snapshot) => {
+onSnapshot(collection(db, "posts", postId, "comments"), (snapshot) => {
     commentList.innerHTML = "";
 
     snapshot.forEach((document) => {
