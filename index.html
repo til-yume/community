@@ -514,7 +514,44 @@
   margin-bottom: 8px;
 }
     
+.rooms-list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 22px;
+}
 
+.user-room-card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 26px;
+  border: 1px solid #f1dfd2;
+  box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
+  text-align: center;
+}
+
+.user-room-card .room-icon {
+  font-size: 42px;
+  margin-bottom: 10px;
+}
+
+.user-room-card h3 {
+  color: #4a2f21;
+  font-size: 20px;
+  margin-bottom: 6px;
+}
+
+.user-room-card .room-user {
+  color: #b8754a;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.user-room-card p {
+  color: #66554a;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+    
 @media (max-width: 900px) {
   .auth-grid {
     grid-template-columns: 1fr;
@@ -551,6 +588,10 @@
       .form-box {
         padding: 26px 20px;
       }
+        .rooms-list {
+    grid-template-columns: 1fr;
+  }
+    
     }
   </style>
 </head>
@@ -735,6 +776,14 @@
     </div>
   </section>
 
+  <section class="section" id="rooms">
+  <h2>みんなの部屋</h2>
+  <p class="section-lead">住人たちの部屋をのぞいてみよう。</p>
+
+  <div class="rooms-list" id="roomsList">
+  </div>
+</section>
+  
   <footer>
     © 2026 Community. All rights reserved.
   </footer>
@@ -1113,6 +1162,48 @@ async function saveProfile() {
   profileMessage.textContent = "プロフィールを保存しました。";
 }
 
+  const roomsList = document.getElementById("roomsList");
+
+function createUserRoomCard(profile) {
+  const card = document.createElement("div");
+  card.className = "user-room-card";
+
+  const icon = document.createElement("div");
+  icon.className = "room-icon";
+  icon.textContent = "🏡";
+
+  const roomName = document.createElement("h3");
+  roomName.textContent = profile.roomName || "名前のない部屋";
+
+  const userName = document.createElement("div");
+  userName.className = "room-user";
+  userName.textContent = profile.displayName || "名無しの住人";
+
+  const topic = document.createElement("p");
+  topic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
+
+  const bio = document.createElement("p");
+  bio.textContent = profile.bio || "自己紹介はまだありません。";
+
+  card.appendChild(icon);
+  card.appendChild(roomName);
+  card.appendChild(userName);
+  card.appendChild(topic);
+  card.appendChild(bio);
+
+  return card;
+}
+
+onSnapshot(collection(db, "users"), (snapshot) => {
+  roomsList.innerHTML = "";
+
+  snapshot.forEach((docSnap) => {
+    const profile = docSnap.data();
+    const card = createUserRoomCard(profile);
+    roomsList.appendChild(card);
+  });
+});
+  
 window.saveProfile = saveProfile;
   
 window.signup = signup;
