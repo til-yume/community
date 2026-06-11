@@ -917,11 +917,16 @@ const body = bodyInput.value.trim();
 
     errorMessage.style.display = "none";
 
+    const authorName =
+  author ||
+  currentProfile?.displayName ||
+  currentUser.email;
+    
 await addDoc(collection(db, "posts"), {
   title: title,
   category: category,
   body: body,
- author: author || currentProfile?.displayName || currentUser.email,
+  author: authorName,
   userId: currentUser.uid,
   likes: 0,
   likedBy: [],
@@ -1032,6 +1037,14 @@ async function saveProfile() {
     updatedAt: serverTimestamp()
   });
 
+  currentProfile = {
+  displayName: displayNameInput.value.trim(),
+  roomName: roomNameInput.value.trim(),
+  favoriteTopic: favoriteTopicInput.value.trim(),
+  bio: bioInput.value.trim(),
+  email: currentUser.email
+};
+  
   profileMessage.textContent = "プロフィールを保存しました。";
 }
 
