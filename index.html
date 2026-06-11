@@ -1097,6 +1097,13 @@ snapshot.forEach((docSnap) => {
   errorMessage.textContent = "投稿するにはログインしてください。";
   return;
 }
+    
+if (!currentProfile || !currentProfile.displayName) {
+  errorMessage.style.display = "block";
+  errorMessage.textContent = "投稿するにはプロフィールの表示名を保存してください。";
+  return;
+}
+    
 const authorInput = document.getElementById("postAuthor");
 const categoryInput = document.getElementById("postCategory");
 const bodyInput = document.getElementById("postBody");
