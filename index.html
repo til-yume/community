@@ -39,7 +39,7 @@
     }
 
     nav a {
-      margin-left: 20px;
+      margin-left: 18px;
       text-decoration: none;
       color: #6b4b35;
       font-weight: bold;
@@ -110,18 +110,40 @@
       margin-bottom: 40px;
     }
 
-    .village-map {
+    .village-map,
+    .posts,
+    .rooms-list {
       display: grid;
+      gap: 22px;
+    }
+
+    .village-map {
       grid-template-columns: repeat(4, 1fr);
       gap: 18px;
     }
 
-    .map-card {
+    .posts,
+    .rooms-list {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .map-card,
+    .post-card,
+    .user-room-card,
+    .auth-box,
+    .profile-box,
+    .form-box,
+    .my-room-card,
+    .visited-room-card,
+    .visited-posts-box {
       background: #fff;
-      padding: 24px;
-      border-radius: 24px;
       border: 1px solid #f1dfd2;
       box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
+    }
+
+    .map-card {
+      padding: 24px;
+      border-radius: 24px;
       text-align: center;
     }
 
@@ -141,12 +163,17 @@
       color: #66554a;
     }
 
+    .auth-box,
+    .profile-box,
     .form-box {
-      background: #fff;
       border-radius: 30px;
-      padding: 34px;
-      border: 1px solid #f1dfd2;
-      box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
+      padding: 30px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .form-box {
+      max-width: none;
       margin-bottom: 34px;
     }
 
@@ -157,12 +184,24 @@
       text-align: center;
     }
 
- .form-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr 220px;
-  gap: 16px;
-  margin-bottom: 16px;
-}
+    .auth-grid,
+    .profile-grid,
+    .form-grid {
+      display: grid;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .auth-grid,
+    .profile-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .form-grid {
+      grid-template-columns: 1fr 1fr 220px;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
 
     input,
     select,
@@ -191,47 +230,82 @@
       box-shadow: 0 0 0 3px rgba(217, 140, 95, 0.12);
     }
 
-    .submit-button {
-      display: block;
-      width: 100%;
-      padding: 15px 24px;
+    .submit-button,
+    .profile-button,
+    .auth-button,
+    .comment-button {
       border: none;
       border-radius: 999px;
       background: #d98c5f;
       color: #fff;
-      font-size: 16px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .submit-button,
+    .profile-button {
+      display: block;
+      width: 100%;
+      padding: 15px 24px;
+      font-size: 16px;
       box-shadow: 0 8px 20px rgba(217, 140, 95, 0.25);
     }
 
-    .submit-button:hover {
+    .submit-button:hover,
+    .profile-button:hover,
+    .auth-button:hover,
+    .comment-button:hover {
       opacity: 0.9;
     }
 
+    .auth-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .auth-button {
+      padding: 10px 18px;
+    }
+
+    .auth-button.logout {
+      background: #8b7a6f;
+    }
+
+    .login-status {
+      text-align: center;
+      font-weight: bold;
+      color: #8b5e3c;
+      margin-bottom: 18px;
+    }
+
+    .auth-message,
     .error-message {
-      color: #c94c4c;
-      font-size: 14px;
       text-align: center;
       margin-top: 12px;
+      font-size: 13px;
+      color: #c94c4c;
+    }
+
+    .error-message {
       display: none;
     }
 
-    .posts {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
+    .profile-message {
+      text-align: center;
+      margin-top: 12px;
+      font-size: 13px;
+      color: #8b5e3c;
     }
 
     .post-card {
-      background: #fff;
       border-radius: 24px;
       padding: 24px;
-      border: 1px solid #f1dfd2;
-      box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
     }
 
-    .post-tag {
+    .post-tag,
+    .visited-post-tag {
       display: inline-block;
       padding: 4px 12px;
       border-radius: 999px;
@@ -260,92 +334,98 @@
       color: #9a887c;
     }
 
-    .delete-button {
-  margin-top: 14px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 999px;
-  background: #f4e1d5;
-  color: #8b5e3c;
-  font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.delete-button:hover {
-  background: #e8c8b5;
-}
+    .like-button,
+    .delete-button,
+    .comment-delete-button {
+      border: none;
+      border-radius: 999px;
+      font-weight: bold;
+      cursor: pointer;
+      white-space: nowrap;
+    }
 
     .like-button {
-  margin-top: 14px;
-  margin-right: 8px;
-  padding: 8px 14px;
-  border: none;
-  border-radius: 999px;
-  background: #fff1e6;
-  color: #b8754a;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-}
+      margin-top: 14px;
+      margin-right: 8px;
+      padding: 8px 14px;
+      background: #fff1e6;
+      color: #b8754a;
+      font-size: 13px;
+    }
 
-.like-button:hover {
-  background: #f6d8c2;
-}
+    .like-button:hover {
+      background: #f6d8c2;
+    }
 
-.comment-box {
-  margin-top: 18px;
-  padding-top: 16px;
-  border-top: 1px solid #f1dfd2;
-}
+    .delete-button,
+    .comment-delete-button {
+      background: #f4e1d5;
+      color: #8b5e3c;
+    }
 
-.comment-title {
-  font-size: 13px;
-  font-weight: bold;
-  color: #8b5e3c;
-  margin-bottom: 10px;
-}
+    .delete-button {
+      margin-top: 14px;
+      padding: 8px 14px;
+      font-size: 12px;
+    }
 
-.comment-list {
-  display: grid;
-  gap: 8px;
-  margin-bottom: 12px;
-}
+    .delete-button:hover,
+    .comment-delete-button:hover {
+      background: #e8c8b5;
+    }
 
-.comment-item {
-  background: #fff8f1;
-  border-radius: 14px;
-  padding: 8px 12px;
-  color: #66554a;
-  font-size: 13px;
-}
+    .comment-box {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid #f1dfd2;
+    }
 
-.comment-input-wrap {
-  display: grid;
-  grid-template-columns: 1fr 70px;
-  gap: 8px;
-}
+    .comment-title {
+      font-size: 13px;
+      font-weight: bold;
+      color: #8b5e3c;
+      margin-bottom: 10px;
+    }
 
-.comment-input {
-  padding: 10px 12px;
-  border-radius: 999px;
-  font-size: 13px;
-}
+    .comment-list {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
 
-.comment-button {
-  border: none;
-  border-radius: 999px;
-  background: #d98c5f;
-  color: #fff;
-  font-size: 13px;
-  font-weight: bold;
-  cursor: pointer;
-}
+    .comment-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 10px;
+      background: #fff8f1;
+      border-radius: 14px;
+      padding: 8px 12px;
+      color: #66554a;
+      font-size: 13px;
+    }
 
-.comment-button:hover {
-  opacity: 0.9;
-}
-    
+    .comment-delete-button {
+      padding: 5px 10px;
+      font-size: 11px;
+    }
+
+    .comment-input-wrap {
+      display: grid;
+      grid-template-columns: 1fr 70px;
+      gap: 8px;
+    }
+
+    .comment-input {
+      padding: 10px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+
+    .comment-button {
+      font-size: 13px;
+    }
+
     .room {
       background: #fff;
       border-radius: 30px;
@@ -387,6 +467,129 @@
       margin-bottom: 6px;
     }
 
+    .my-room-card {
+      grid-column: 1 / -1;
+      margin-top: 4px;
+      border-radius: 30px;
+      padding: 32px;
+      text-align: center;
+    }
+
+    .room-icon {
+      font-size: 54px;
+      margin-bottom: 10px;
+    }
+
+    .my-room-card h3,
+    .visited-room-card h3 {
+      color: #4a2f21;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .room-owner {
+      color: #b8754a;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .my-room-card p,
+    .visited-room-card p {
+      color: #66554a;
+      margin-bottom: 8px;
+    }
+
+    .user-room-card {
+      border-radius: 24px;
+      padding: 26px;
+      text-align: center;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .user-room-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(90, 60, 40, 0.12);
+    }
+
+    .user-room-card .room-icon {
+      font-size: 42px;
+      margin-bottom: 10px;
+    }
+
+    .user-room-card h3 {
+      color: #4a2f21;
+      font-size: 20px;
+      margin-bottom: 6px;
+    }
+
+    .user-room-card .room-user {
+      color: #b8754a;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .user-room-card p {
+      color: #66554a;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .visited-room-card,
+    .visited-posts-box {
+      border-radius: 30px;
+      padding: 32px;
+      max-width: 760px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .visited-posts-box {
+      margin-top: 28px;
+      text-align: left;
+    }
+
+    .visited-posts-box h3 {
+      text-align: center;
+      color: #4a2f21;
+      font-size: 22px;
+      margin-bottom: 18px;
+    }
+
+    .visited-posts-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .visited-post-item {
+      background: #fff8f1;
+      border-radius: 18px;
+      padding: 16px;
+      border: 1px solid #f1dfd2;
+    }
+
+    .visited-post-item h4 {
+      color: #4a2f21;
+      font-size: 16px;
+      margin-bottom: 6px;
+    }
+
+    .visited-post-item p,
+    .empty-visited-posts,
+    .empty-posts {
+      color: #9a887c;
+      font-size: 14px;
+    }
+
+    .empty-posts {
+      grid-column: 1 / -1;
+      text-align: center;
+      background: #fff;
+      border-radius: 24px;
+      padding: 24px;
+      border: 1px solid #f1dfd2;
+    }
+
     footer {
       text-align: center;
       padding: 35px 8%;
@@ -394,268 +597,17 @@
       font-size: 13px;
     }
 
-    .auth-box {
-  background: #fff;
-  border-radius: 30px;
-  padding: 30px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-    .profile-box {
-  background: #fff;
-  border-radius: 30px;
-  padding: 30px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.profile-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.profile-button {
-  display: block;
-  width: 100%;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 999px;
-  background: #d98c5f;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.profile-message {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 13px;
-  color: #8b5e3c;
-}
-    
-.login-status {
-  text-align: center;
-  font-weight: bold;
-  color: #8b5e3c;
-  margin-bottom: 18px;
-}
-
-.auth-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin-bottom: 14px;
-}
-
-.auth-buttons {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-
-.auth-button {
-  padding: 10px 18px;
-  border: none;
-  border-radius: 999px;
-  background: #d98c5f;
-  color: #fff;
-  font-weight: bold;
-  cursor: pointer;
-}
-
-.auth-button.logout {
-  background: #8b7a6f;
-}
-
-.auth-message {
-  text-align: center;
-  margin-top: 12px;
-  font-size: 13px;
-  color: #c94c4c;
-}
-
-    .my-room-card {
-  margin-top: 28px;
-  background: #fff;
-  border-radius: 30px;
-  padding: 32px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  text-align: center;
-}
-
-.room-icon {
-  font-size: 54px;
-  margin-bottom: 10px;
-}
-
-.my-room-card h3 {
-  color: #4a2f21;
-  font-size: 24px;
-  margin-bottom: 8px;
-}
-
-.room-owner {
-  color: #b8754a;
-  font-weight: bold;
-  margin-bottom: 12px;
-}
-
-.my-room-card p {
-  color: #66554a;
-  margin-bottom: 8px;
-}
-    
-.rooms-list {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 22px;
-}
-
-.user-room-card {
-  background: #fff;
-  border-radius: 24px;
-  padding: 26px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 8px 24px rgba(90, 60, 40, 0.08);
-  text-align: center;
-}
-
-.user-room-card .room-icon {
-  font-size: 42px;
-  margin-bottom: 10px;
-}
-
-.user-room-card h3 {
-  color: #4a2f21;
-  font-size: 20px;
-  margin-bottom: 6px;
-}
-
-.user-room-card .room-user {
-  color: #b8754a;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.user-room-card p {
-  color: #66554a;
-  font-size: 14px;
-  margin-bottom: 8px;
-}
-
-      .visited-room-card {
-  background: #fff;
-  border-radius: 30px;
-  padding: 36px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  text-align: center;
-  max-width: 760px;
-  margin: 0 auto;
-}
-
-.visited-room-card h3 {
-  color: #4a2f21;
-  font-size: 26px;
-  margin-bottom: 8px;
-}
-
-.user-room-card {
-  cursor: pointer;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.user-room-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 30px rgba(90, 60, 40, 0.12);
-}
-    .visited-posts-box {
-  margin-top: 28px;
-  background: #fff;
-  border-radius: 30px;
-  padding: 30px;
-  border: 1px solid #f1dfd2;
-  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
-  max-width: 760px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.visited-posts-box h3 {
-  text-align: center;
-  color: #4a2f21;
-  font-size: 22px;
-  margin-bottom: 18px;
-}
-
-.visited-posts-list {
-  display: grid;
-  gap: 14px;
-}
-
-.visited-post-item {
-  background: #fff8f1;
-  border-radius: 18px;
-  padding: 16px;
-  border: 1px solid #f1dfd2;
-}
-
-.visited-post-item .visited-post-tag {
-  display: inline-block;
-  padding: 3px 10px;
-  border-radius: 999px;
-  background: #fff1e6;
-  color: #b8754a;
-  font-size: 11px;
-  font-weight: bold;
-  margin-bottom: 8px;
-}
-
-.visited-post-item h4 {
-  color: #4a2f21;
-  font-size: 16px;
-  margin-bottom: 6px;
-}
-
-.visited-post-item p {
-  color: #66554a;
-  font-size: 13px;
-}
-
-.empty-visited-posts {
-  text-align: center;
-  color: #9a887c;
-  font-size: 14px;
-}
-    
-@media (max-width: 900px) {
-  .auth-grid {
-    grid-template-columns: 1fr;
-  }
-  .profile-grid {
-  grid-template-columns: 1fr;
-} 
-}
-    
     @media (max-width: 900px) {
-      .village-map,
-      .posts,
-      .room,
-      .form-grid {
-        grid-template-columns: 1fr;
+      header {
+        padding: 16px 5%;
       }
 
       nav {
         display: none;
+      }
+
+      .hero {
+        padding: 70px 5% 55px;
       }
 
       .hero h1 {
@@ -670,13 +622,27 @@
         padding: 55px 5%;
       }
 
-      .form-box {
+      .village-map,
+      .posts,
+      .rooms-list,
+      .room,
+      .form-grid,
+      .auth-grid,
+      .profile-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .form-box,
+      .auth-box,
+      .profile-box,
+      .visited-room-card,
+      .visited-posts-box {
         padding: 26px 20px;
       }
-        .rooms-list {
-    grid-template-columns: 1fr;
-  }
-    
+
+      .comment-input-wrap {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -685,9 +651,10 @@
   <header>
     <div class="logo">Community</div>
     <nav>
-      <a href="#map">村マップ</a>
+      <a href="#auth">ログイン</a>
       <a href="#create">投稿する</a>
       <a href="#posts">みんなの投稿</a>
+      <a href="#rooms">みんなの部屋</a>
       <a href="#room">自分の部屋</a>
     </nav>
   </header>
@@ -703,47 +670,45 @@
   </section>
 
   <section class="section" id="auth">
-  <h2>ログイン</h2>
-  <p class="section-lead">投稿するには、メールアドレスでログインしてください。</p>
+    <h2>ログイン</h2>
+    <p class="section-lead">投稿するには、メールアドレスでログインしてください。</p>
 
-  <div class="auth-box">
-    <div id="loginStatus" class="login-status">ログインしていません</div>
+    <div class="auth-box">
+      <div id="loginStatus" class="login-status">ログインしていません</div>
 
-    <div class="auth-grid">
-      <input type="email" id="emailInput" placeholder="メールアドレス" />
-      <input type="password" id="passwordInput" placeholder="パスワード" />
+      <div class="auth-grid">
+        <input type="email" id="emailInput" placeholder="メールアドレス" />
+        <input type="password" id="passwordInput" placeholder="パスワード" />
+      </div>
+
+      <div class="auth-buttons">
+        <button class="auth-button" onclick="signup()">新規登録</button>
+        <button class="auth-button" onclick="login()">ログイン</button>
+        <button class="auth-button logout" onclick="logout()">ログアウト</button>
+      </div>
+
+      <p class="auth-message" id="authMessage"></p>
     </div>
+  </section>
 
-    <div class="auth-buttons">
-      <button class="auth-button" onclick="signup()">新規登録</button>
-      <button class="auth-button" onclick="login()">ログイン</button>
-      <button class="auth-button logout" onclick="logout()">ログアウト</button>
+  <section class="section" id="profile">
+    <h2>プロフィール編集</h2>
+    <p class="section-lead">ログインすると、自分の部屋情報を保存できます。</p>
+
+    <div class="profile-box">
+      <div class="profile-grid">
+        <input type="text" id="displayNameInput" placeholder="表示名" />
+        <input type="text" id="roomNameInput" placeholder="部屋の名前" />
+      </div>
+
+      <input type="text" id="favoriteTopicInput" placeholder="好きな話題 例：音楽、恋愛、仕事、雑談" />
+      <textarea id="bioInput" placeholder="自己紹介"></textarea>
+
+      <button class="profile-button" onclick="saveProfile()">プロフィールを保存</button>
+      <p class="profile-message" id="profileMessage"></p>
     </div>
+  </section>
 
-    <p class="auth-message" id="authMessage"></p>
-  </div>
-</section>
-  
-<section class="section" id="profile">
-  <h2>プロフィール編集</h2>
-  <p class="section-lead">ログインすると、自分の部屋情報を保存できます。</p>
-
-  <div class="profile-box">
-    <div class="profile-grid">
-      <input type="text" id="displayNameInput" placeholder="表示名" />
-      <input type="text" id="roomNameInput" placeholder="部屋の名前" />
-    </div>
-
-    <input type="text" id="favoriteTopicInput" placeholder="好きな話題 例：音楽、恋愛、仕事、雑談" />
-
-    <textarea id="bioInput" placeholder="自己紹介"></textarea>
-
-    <button class="profile-button" onclick="saveProfile()">プロフィールを保存</button>
-
-    <p class="profile-message" id="profileMessage"></p>
-  </div>
-</section>
-  
   <section class="section" id="map">
     <h2>村マップ</h2>
     <p class="section-lead">まずは、こんな場所があるコミュニティを目指します。</p>
@@ -777,16 +742,16 @@
 
   <section class="section" id="create">
     <h2>投稿してみる</h2>
-    <p class="section-lead">今は練習版なので、更新すると投稿は消えます。</p>
+    <p class="section-lead">投稿・コメントにはログインとプロフィール表示名の保存が必要です。</p>
 
     <div class="form-box">
       <h3>村の掲示板に投稿する</h3>
 
-<div class="form-grid">
-  <input type="text" id="postTitle" placeholder="投稿タイトルを入力" />
-  <input type="text" id="postAuthor" placeholder="名前を入力" />
+      <div class="form-grid">
+        <input type="text" id="postTitle" placeholder="投稿タイトルを入力" />
+        <input type="text" id="postAuthor" placeholder="名前を入力（空欄なら表示名）" />
 
-  <select id="postCategory">
+        <select id="postCategory">
           <option value="雑談">雑談</option>
           <option value="相談">相談</option>
           <option value="好きなもの">好きなもの</option>
@@ -795,41 +760,15 @@
       </div>
 
       <textarea id="postBody" placeholder="本文を入力してね"></textarea>
-
       <button class="submit-button" onclick="addPost()">投稿する</button>
-
-      <p class="error-message" id="errorMessage">
-        タイトルと本文を入力してね。
-      </p>
+      <p class="error-message" id="errorMessage">タイトルと本文を入力してね。</p>
     </div>
   </section>
 
   <section class="section" id="posts">
     <h2>みんなの投稿</h2>
-    <p class="section-lead">投稿すると、ここにカードが追加されます。</p>
-
-    <div class="posts" id="postList">
-      <div class="post-card">
-        <span class="post-tag">雑談</span>
-        <h3>今日ちょっと嬉しかったこと</h3>
-        <p>いつもより少し早く起きられた。小さいことだけど、今日はいい日になりそう。</p>
-        <div class="post-meta">♡ 12　💬 3　by まちの住人</div>
-      </div>
-
-      <div class="post-card">
-        <span class="post-tag">相談</span>
-        <h3>自分らしさって何だろう</h3>
-        <p>人に合わせすぎて、たまに自分が何を好きなのかわからなくなる。</p>
-        <div class="post-meta">♡ 28　💬 9　by 旅人</div>
-      </div>
-
-      <div class="post-card">
-        <span class="post-tag">好きなもの</span>
-        <h3>夜に聴きたい曲を集めたい</h3>
-        <p>静かな夜に合う曲を、みんなで少しずつ持ち寄る場所がほしい。</p>
-        <div class="post-meta">♡ 19　💬 5　by 音楽好き</div>
-      </div>
-    </div>
+    <p class="section-lead">住人たちの投稿がここに並びます。</p>
+    <div class="posts" id="postList"></div>
   </section>
 
   <section class="section" id="room">
@@ -850,551 +789,604 @@
         <strong>あなたの小さな部屋</strong>
         <p>好きなもの・話したいこと・今の気分を飾れる場所</p>
       </div>
-      
+
       <div class="my-room-card" id="myRoomCard">
-  <div class="room-icon">🏡</div>
-  <h3 id="myRoomName">まだ部屋がありません</h3>
-  <p class="room-owner" id="myDisplayName">ログインすると表示されます</p>
-  <p id="myFavoriteTopic">好きな話題：未設定</p>
-  <p id="myBio">自己紹介：未設定</p>
-</div>
+        <div class="room-icon">🏡</div>
+        <h3 id="myRoomName">まだ部屋がありません</h3>
+        <p class="room-owner" id="myDisplayName">ログインすると表示されます</p>
+        <p id="myFavoriteTopic">好きな話題：未設定</p>
+        <p id="myBio">自己紹介：未設定</p>
+      </div>
     </div>
   </section>
 
-  <section class="section" id="roomDetail">
-  <h2>訪問中の部屋</h2>
-  <p class="section-lead">部屋カードをクリックすると、ここに詳細が表示されます。</p>
+  <section class="section" id="rooms">
+    <h2>みんなの部屋</h2>
+    <p class="section-lead">住人たちの部屋をのぞいてみよう。</p>
+    <div class="rooms-list" id="roomsList"></div>
+  </section>
 
-  <div class="visited-room-card" id="visitedRoomCard">
-    <div class="room-icon">🚪</div>
-    <h3 id="visitedRoomName">まだ部屋を選んでいません</h3>
-    <p class="room-owner" id="visitedDisplayName">みんなの部屋から選んでください</p>
-    <p id="visitedFavoriteTopic">好きな話題：未選択</p>
-    <p id="visitedBio">自己紹介：未選択</p>
-  </div>
+  <section class="section" id="roomDetail">
+    <h2>訪問中の部屋</h2>
+    <p class="section-lead">部屋カードをクリックすると、ここに詳細が表示されます。</p>
+
+    <div class="visited-room-card" id="visitedRoomCard">
+      <div class="room-icon">🚪</div>
+      <h3 id="visitedRoomName">まだ部屋を選んでいません</h3>
+      <p class="room-owner" id="visitedDisplayName">みんなの部屋から選んでください</p>
+      <p id="visitedFavoriteTopic">好きな話題：未選択</p>
+      <p id="visitedBio">自己紹介：未選択</p>
+    </div>
 
     <div class="visited-posts-box">
-  <h3>この住人の投稿</h3>
-  <div class="visited-posts-list" id="visitedPostsList">
-    <p class="empty-visited-posts">部屋を選ぶと投稿が表示されます。</p>
-  </div>
-</div>
-    
-</section>
-  
-  <section class="section" id="rooms">
-  <h2>みんなの部屋</h2>
-  <p class="section-lead">住人たちの部屋をのぞいてみよう。</p>
+      <h3>この住人の投稿</h3>
+      <div class="visited-posts-list" id="visitedPostsList">
+        <p class="empty-visited-posts">部屋を選ぶと投稿が表示されます。</p>
+      </div>
+    </div>
+  </section>
 
-  <div class="rooms-list" id="roomsList">
-  </div>
-</section>
-  
   <footer>
     © 2026 Community. All rights reserved.
   </footer>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-import {
-  getFirestore,
-  collection,
-  addDoc,
-  onSnapshot,
-  serverTimestamp,
-  deleteDoc,
-  doc,
-  query,
-  orderBy,
-  updateDoc,
-  increment,
-  arrayUnion,
-  setDoc,
-  getDoc
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+    import {
+      getFirestore,
+      collection,
+      addDoc,
+      onSnapshot,
+      serverTimestamp,
+      deleteDoc,
+      doc,
+      query,
+      orderBy,
+      updateDoc,
+      increment,
+      arrayUnion,
+      setDoc,
+      getDoc
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-  import {
-  getAuth,
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-  signOut,
-  onAuthStateChanged
-} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
-  
-const firebaseConfig = {
-  apiKey: "AIzaSyDyeRAUd-4lNVRBQYRUqohS0pl9EaVjIoo",
-  authDomain: "community-test-d5f53.firebaseapp.com",
-  projectId: "community-test-d5f53",
-  storageBucket: "community-test-d5f53.firebasestorage.app",
-  messagingSenderId: "190626713279",
-  appId: "1:190626713279:web:a9ec8d787c71f0878fc00a"
-};
+    import {
+      getAuth,
+      createUserWithEmailAndPassword,
+      signInWithEmailAndPassword,
+      signOut,
+      onAuthStateChanged
+    } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-auth.js";
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
+    const firebaseConfig = {
+      apiKey: "AIzaSyDyeRAUd-4lNVRBQYRUqohS0pl9EaVjIoo",
+      authDomain: "community-test-d5f53.firebaseapp.com",
+      projectId: "community-test-d5f53",
+      storageBucket: "community-test-d5f53.firebasestorage.app",
+      messagingSenderId: "190626713279",
+      appId: "1:190626713279:web:a9ec8d787c71f0878fc00a"
+    };
 
-let currentUser = null;
-let currentProfile = null;
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
 
-  const postList = document.getElementById("postList");
-  const errorMessage = document.getElementById("errorMessage");
+    let currentUser = null;
+    let currentProfile = null;
+    let allPosts = [];
+    let currentVisitedUserId = null;
 
-function createPostCard(post, postId) {
-  const postCard = document.createElement("div");
-  postCard.className = "post-card";
+    const postList = document.getElementById("postList");
+    const errorMessage = document.getElementById("errorMessage");
+    const emailInput = document.getElementById("emailInput");
+    const passwordInput = document.getElementById("passwordInput");
+    const loginStatus = document.getElementById("loginStatus");
+    const authMessage = document.getElementById("authMessage");
+    const displayNameInput = document.getElementById("displayNameInput");
+    const roomNameInput = document.getElementById("roomNameInput");
+    const favoriteTopicInput = document.getElementById("favoriteTopicInput");
+    const bioInput = document.getElementById("bioInput");
+    const profileMessage = document.getElementById("profileMessage");
+    const roomsList = document.getElementById("roomsList");
 
-  const tag = document.createElement("span");
-  tag.className = "post-tag";
-  tag.textContent = post.category || "雑談";
-
-  const title = document.createElement("h3");
-  title.textContent = post.title || "無題の投稿";
-
-  const body = document.createElement("p");
-  body.textContent = post.body || "";
-
-  const meta = document.createElement("div");
-  meta.className = "post-meta";
-  meta.textContent = `by ${post.author || "匿名"}`;
-
-  const likeButton = document.createElement("button");
-  likeButton.className = "like-button";
-  likeButton.textContent = `♡ ${post.likes || 0}`;
-
-likeButton.onclick = async () => {
-  if (!currentUser) {
-    alert("いいねするにはログインしてください。");
-    return;
-  }
-
-  const likedBy = post.likedBy || [];
-
-  if (likedBy.includes(currentUser.uid)) {
-    alert("この投稿にはすでにいいねしています。");
-    return;
-  }
-
-  await updateDoc(doc(db, "posts", postId), {
-    likes: increment(1),
-    likedBy: arrayUnion(currentUser.uid)
-  });
-};
-
-  const deleteButton = document.createElement("button");
-  deleteButton.textContent = "削除";
-  deleteButton.className = "delete-button";
-  deleteButton.onclick = async () => {
-    const result = confirm("この投稿を削除しますか？");
-
-    if (!result) {
-      return;
-    }
-
-    await deleteDoc(doc(db, "posts", postId));
-  };
-
-  const commentBox = document.createElement("div");
-  commentBox.className = "comment-box";
-
-  const commentTitle = document.createElement("div");
-  commentTitle.className = "comment-title";
-  commentTitle.textContent = "コメント";
-
-  const commentList = document.createElement("div");
-  commentList.className = "comment-list";
-  commentList.id = `comments-${postId}`;
-
-  const commentInputWrap = document.createElement("div");
-  commentInputWrap.className = "comment-input-wrap";
-
-  const commentInput = document.createElement("input");
-  commentInput.type = "text";
-  commentInput.placeholder = "コメントを書く";
-  commentInput.className = "comment-input";
-  commentInput.id = `comment-input-${postId}`;
-
-  const commentButton = document.createElement("button");
-  commentButton.textContent = "送信";
-  commentButton.className = "comment-button";
-commentButton.onclick = async () => {
-  if (!currentUser) {
-    alert("コメントするにはログインしてください。");
-    return;
-  }
-
-  const commentText = commentInput.value.trim();
-
-  if (commentText === "") {
-    return;
-  }
-
-  await addDoc(collection(db, "posts", postId, "comments"), {
-    text: commentText,
- author: currentProfile?.displayName || currentUser.email,
-    userId: currentUser.uid,
-    createdAt: serverTimestamp()
-  });
-
-  commentInput.value = "";
-};
-
-  commentInputWrap.appendChild(commentInput);
-  commentInputWrap.appendChild(commentButton);
-
-  commentBox.appendChild(commentTitle);
-  commentBox.appendChild(commentList);
-  commentBox.appendChild(commentInputWrap);
-
-onSnapshot(collection(db, "posts", postId, "comments"), (snapshot) => {
-  commentList.innerHTML = "";
-
-  snapshot.forEach((docSnap) => {
-    const comment = docSnap.data();
-
-    const commentItem = document.createElement("div");
-    commentItem.className = "comment-item";
-    commentItem.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
-
-    commentList.appendChild(commentItem);
-  });
-});
-
-  postCard.appendChild(tag);
-  postCard.appendChild(title);
-  postCard.appendChild(body);
-  postCard.appendChild(meta);
-  postCard.appendChild(likeButton);
-  
-if (currentUser && post.userId === currentUser.uid) {
-  postCard.appendChild(deleteButton);
-}
-  
-  postCard.appendChild(commentBox);
-
-  return postCard;
-}
-
-const postsQuery = query(
-  collection(db, "posts"),
-  orderBy("createdAt", "desc")
-);
-
-onSnapshot(postsQuery, (snapshot) => {
-  postList.innerHTML = "";
-
-snapshot.forEach((docSnap) => {
-  const post = docSnap.data();
-  const postCard = createPostCard(post, docSnap.id);
-  postList.appendChild(postCard);
-});
-});
-
-  async function addPost() {
-    const titleInput = document.getElementById("postTitle");
-    if (!currentUser) {
-  errorMessage.style.display = "block";
-  errorMessage.textContent = "投稿するにはログインしてください。";
-  return;
-}
-    
-if (!currentProfile || !currentProfile.displayName) {
-  errorMessage.style.display = "block";
-  errorMessage.textContent = "投稿するにはプロフィールの表示名を保存してください。";
-  return;
-}
-    
-const authorInput = document.getElementById("postAuthor");
-const categoryInput = document.getElementById("postCategory");
-const bodyInput = document.getElementById("postBody");
-
-const title = titleInput.value.trim();
-const author = authorInput.value.trim();
-const category = categoryInput.value;
-const body = bodyInput.value.trim();
-
-    if (title === "" || body === "") {
+    function showError(message) {
       errorMessage.style.display = "block";
-      return;
+      errorMessage.textContent = message;
     }
 
-    errorMessage.style.display = "none";
+    function clearError() {
+      errorMessage.style.display = "none";
+      errorMessage.textContent = "";
+    }
 
-    const authorName =
-  author ||
-  currentProfile?.displayName ||
-  currentUser.email;
-    
-await addDoc(collection(db, "posts"), {
-  title: title,
-  category: category,
-  body: body,
-  author: authorName,
-  userId: currentUser.uid,
-  likes: 0,
-  likedBy: [],
-  createdAt: serverTimestamp()
-});
+    function hasDisplayName() {
+      return Boolean(currentProfile && currentProfile.displayName && currentProfile.displayName.trim());
+    }
 
-    titleInput.value = "";
-    bodyInput.value = "";
-authorInput.value = "";
-    
-    document.getElementById("posts").scrollIntoView({
-      behavior: "smooth"
-    });
-  }
-
-  const emailInput = document.getElementById("emailInput");
-const passwordInput = document.getElementById("passwordInput");
-const loginStatus = document.getElementById("loginStatus");
-const authMessage = document.getElementById("authMessage");
-
-onAuthStateChanged(auth, (user) => {
-  currentUser = user;
-
-  if (user) {
-    loginStatus.textContent = `ログイン中：${user.email}`;
-    authMessage.textContent = "";
-    loadProfile(user);
-} else {
-  loginStatus.textContent = "ログインしていません";
-  currentProfile = null;
-}
-});
-
-async function signup() {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  if (email === "" || password === "") {
-    authMessage.textContent = "メールアドレスとパスワードを入力してください。";
-    return;
-  }
-
-  try {
-    await createUserWithEmailAndPassword(auth, email, password);
-    authMessage.textContent = "新規登録しました。";
-  } catch (error) {
-    authMessage.textContent = error.message;
-  }
-}
-
-async function login() {
-  const email = emailInput.value.trim();
-  const password = passwordInput.value.trim();
-
-  if (email === "" || password === "") {
-    authMessage.textContent = "メールアドレスとパスワードを入力してください。";
-    return;
-  }
-
-  try {
-    await signInWithEmailAndPassword(auth, email, password);
-    authMessage.textContent = "ログインしました。";
-  } catch (error) {
-    authMessage.textContent = error.message;
-  }
-}
-
-async function logout() {
-  await signOut(auth);
-  authMessage.textContent = "ログアウトしました。";
-}
-
-  const displayNameInput = document.getElementById("displayNameInput");
-const roomNameInput = document.getElementById("roomNameInput");
-const favoriteTopicInput = document.getElementById("favoriteTopicInput");
-const bioInput = document.getElementById("bioInput");
-const profileMessage = document.getElementById("profileMessage");
-
-  function updateMyRoom(profile) {
-  const myRoomName = document.getElementById("myRoomName");
-  const myDisplayName = document.getElementById("myDisplayName");
-  const myFavoriteTopic = document.getElementById("myFavoriteTopic");
-  const myBio = document.getElementById("myBio");
-
-  if (!profile) {
-    myRoomName.textContent = "まだ部屋がありません";
-    myDisplayName.textContent = "ログインすると表示されます";
-    myFavoriteTopic.textContent = "好きな話題：未設定";
-    myBio.textContent = "自己紹介：未設定";
-    return;
-  }
-
-  myRoomName.textContent = profile.roomName || "名前のない部屋";
-  myDisplayName.textContent = profile.displayName || "名無しの住人";
-  myFavoriteTopic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
-  myBio.textContent = `自己紹介：${profile.bio || "未設定"}`;
-}
-  
-async function loadProfile(user) {
-  const profileRef = doc(db, "users", user.uid);
-  const profileSnap = await getDoc(profileRef);
-
-  if (profileSnap.exists()) {
-    const profile = profileSnap.data();
-    currentProfile = profile;
-
-    displayNameInput.value = profile.displayName || "";
-    roomNameInput.value = profile.roomName || "";
-    favoriteTopicInput.value = profile.favoriteTopic || "";
-    bioInput.value = profile.bio || "";
-    updateMyRoom(profile);
-} else {
-  currentProfile = null;
-  updateMyRoom(null);
-}
-}
-
-async function saveProfile() {
-  if (!currentUser) {
-    profileMessage.textContent = "プロフィールを保存するにはログインしてください。";
-    return;
-  }
-
-  await setDoc(doc(db, "users", currentUser.uid), {
-    displayName: displayNameInput.value.trim(),
-    roomName: roomNameInput.value.trim(),
-    favoriteTopic: favoriteTopicInput.value.trim(),
-    bio: bioInput.value.trim(),
-    email: currentUser.email,
-    updatedAt: serverTimestamp()
-  });
-
-  currentProfile = {
-  displayName: displayNameInput.value.trim(),
-  roomName: roomNameInput.value.trim(),
-  favoriteTopic: favoriteTopicInput.value.trim(),
-  bio: bioInput.value.trim(),
-  email: currentUser.email
-};
-
-  updateMyRoom(currentProfile);
-  
-  profileMessage.textContent = "プロフィールを保存しました。";
-}
-
-  const roomsList = document.getElementById("roomsList");
-
-function createUserRoomCard(profile, userId) {
-  const card = document.createElement("div");
-  card.className = "user-room-card";
-
-  const icon = document.createElement("div");
-  icon.className = "room-icon";
-  icon.textContent = "🏡";
-
-  const roomName = document.createElement("h3");
-  roomName.textContent = profile.roomName || "名前のない部屋";
-
-  const userName = document.createElement("div");
-  userName.className = "room-user";
-  userName.textContent = profile.displayName || "名無しの住人";
-
-  const topic = document.createElement("p");
-  topic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
-
-  const bio = document.createElement("p");
-  bio.textContent = profile.bio || "自己紹介はまだありません。";
-
-card.appendChild(icon);
-card.appendChild(roomName);
-card.appendChild(userName);
-card.appendChild(topic);
-card.appendChild(bio);
-
-card.onclick = () => {
-  showVisitedRoom(profile, userId);
-};
-
-return card;
-}
-
-function showVisitedRoom(profile, userId) {
-  const visitedRoomName = document.getElementById("visitedRoomName");
-  const visitedDisplayName = document.getElementById("visitedDisplayName");
-  const visitedFavoriteTopic = document.getElementById("visitedFavoriteTopic");
-  const visitedBio = document.getElementById("visitedBio");
-
-  visitedRoomName.textContent = profile.roomName || "名前のない部屋";
-  visitedDisplayName.textContent = profile.displayName || "名無しの住人";
-  visitedFavoriteTopic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
-  visitedBio.textContent = `自己紹介：${profile.bio || "未設定"}`;
-
-  loadVisitedUserPosts(userId);
-  
-  document.getElementById("roomDetail").scrollIntoView({
-    behavior: "smooth"
-  });
-}
-function loadVisitedUserPosts(userId) {
-  const visitedPostsList = document.getElementById("visitedPostsList");
-
-  visitedPostsList.innerHTML = "";
-
-  const userPostsQuery = query(
-    collection(db, "posts"),
-    orderBy("createdAt", "desc")
-  );
-
-  onSnapshot(userPostsQuery, (snapshot) => {
-    visitedPostsList.innerHTML = "";
-
-    let hasPosts = false;
-
-    snapshot.forEach((docSnap) => {
-      const post = docSnap.data();
-
-      if (post.userId !== userId) {
-        return;
-      }
-
-      hasPosts = true;
-
-      const postItem = document.createElement("div");
-      postItem.className = "visited-post-item";
+    function createPostCard(post, postId) {
+      const postCard = document.createElement("div");
+      postCard.className = "post-card";
 
       const tag = document.createElement("span");
-      tag.className = "visited-post-tag";
+      tag.className = "post-tag";
       tag.textContent = post.category || "雑談";
 
-      const title = document.createElement("h4");
+      const title = document.createElement("h3");
       title.textContent = post.title || "無題の投稿";
 
       const body = document.createElement("p");
       body.textContent = post.body || "";
 
-      postItem.appendChild(tag);
-      postItem.appendChild(title);
-      postItem.appendChild(body);
+      const meta = document.createElement("div");
+      meta.className = "post-meta";
+      meta.textContent = `by ${post.author || "匿名"}`;
 
-      visitedPostsList.appendChild(postItem);
+      const likeButton = document.createElement("button");
+      likeButton.className = "like-button";
+      likeButton.textContent = `♡ ${post.likes || 0}`;
+
+      likeButton.onclick = async () => {
+        if (!currentUser) {
+          alert("いいねするにはログインしてください。");
+          return;
+        }
+
+        const likedBy = post.likedBy || [];
+
+        if (likedBy.includes(currentUser.uid)) {
+          alert("この投稿にはすでにいいねしています。");
+          return;
+        }
+
+        await updateDoc(doc(db, "posts", postId), {
+          likes: increment(1),
+          likedBy: arrayUnion(currentUser.uid)
+        });
+      };
+
+      const deleteButton = document.createElement("button");
+      deleteButton.textContent = "削除";
+      deleteButton.className = "delete-button";
+      deleteButton.onclick = async () => {
+        const result = confirm("この投稿を削除しますか？");
+
+        if (!result) {
+          return;
+        }
+
+        await deleteDoc(doc(db, "posts", postId));
+      };
+
+      const commentBox = createCommentBox(postId);
+
+      postCard.appendChild(tag);
+      postCard.appendChild(title);
+      postCard.appendChild(body);
+      postCard.appendChild(meta);
+      postCard.appendChild(likeButton);
+
+      if (currentUser && post.userId === currentUser.uid) {
+        postCard.appendChild(deleteButton);
+      }
+
+      postCard.appendChild(commentBox);
+
+      return postCard;
+    }
+
+    function createCommentBox(postId) {
+      const commentBox = document.createElement("div");
+      commentBox.className = "comment-box";
+
+      const commentTitle = document.createElement("div");
+      commentTitle.className = "comment-title";
+      commentTitle.textContent = "コメント";
+
+      const commentList = document.createElement("div");
+      commentList.className = "comment-list";
+
+      const commentInputWrap = document.createElement("div");
+      commentInputWrap.className = "comment-input-wrap";
+
+      const commentInput = document.createElement("input");
+      commentInput.type = "text";
+      commentInput.placeholder = "コメントを書く";
+      commentInput.className = "comment-input";
+
+      const commentButton = document.createElement("button");
+      commentButton.textContent = "送信";
+      commentButton.className = "comment-button";
+
+      commentButton.onclick = async () => {
+        if (!currentUser) {
+          alert("コメントするにはログインしてください。");
+          return;
+        }
+
+        if (!hasDisplayName()) {
+          alert("コメントするにはプロフィールの表示名を保存してください。");
+          return;
+        }
+
+        const commentText = commentInput.value.trim();
+
+        if (commentText === "") {
+          return;
+        }
+
+        await addDoc(collection(db, "posts", postId, "comments"), {
+          text: commentText,
+          author: currentProfile.displayName,
+          userId: currentUser.uid,
+          createdAt: serverTimestamp()
+        });
+
+        commentInput.value = "";
+      };
+
+      commentInputWrap.appendChild(commentInput);
+      commentInputWrap.appendChild(commentButton);
+
+      commentBox.appendChild(commentTitle);
+      commentBox.appendChild(commentList);
+      commentBox.appendChild(commentInputWrap);
+
+      onSnapshot(collection(db, "posts", postId, "comments"), (snapshot) => {
+        commentList.innerHTML = "";
+
+        snapshot.forEach((docSnap) => {
+          const comment = docSnap.data();
+          const commentItem = document.createElement("div");
+          commentItem.className = "comment-item";
+
+          const commentText = document.createElement("span");
+          commentText.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
+
+          commentItem.appendChild(commentText);
+
+          if (currentUser && comment.userId === currentUser.uid) {
+            const commentDeleteButton = document.createElement("button");
+            commentDeleteButton.textContent = "削除";
+            commentDeleteButton.className = "comment-delete-button";
+
+            commentDeleteButton.onclick = async () => {
+              const result = confirm("このコメントを削除しますか？");
+
+              if (!result) {
+                return;
+              }
+
+              await deleteDoc(doc(db, "posts", postId, "comments", docSnap.id));
+            };
+
+            commentItem.appendChild(commentDeleteButton);
+          }
+
+          commentList.appendChild(commentItem);
+        });
+      });
+
+      return commentBox;
+    }
+
+    function renderPosts() {
+      postList.innerHTML = "";
+
+      if (allPosts.length === 0) {
+        postList.innerHTML = `<p class="empty-posts">まだ投稿はありません。</p>`;
+        return;
+      }
+
+      allPosts.forEach(({ id, data }) => {
+        const postCard = createPostCard(data, id);
+        postList.appendChild(postCard);
+      });
+    }
+
+    const postsQuery = query(
+      collection(db, "posts"),
+      orderBy("createdAt", "desc")
+    );
+
+    onSnapshot(postsQuery, (snapshot) => {
+      allPosts = [];
+
+      snapshot.forEach((docSnap) => {
+        allPosts.push({
+          id: docSnap.id,
+          data: docSnap.data()
+        });
+      });
+
+      renderPosts();
+
+      if (currentVisitedUserId) {
+        loadVisitedUserPosts(currentVisitedUserId);
+      }
     });
 
-    if (!hasPosts) {
-      visitedPostsList.innerHTML = `<p class="empty-visited-posts">この住人の投稿はまだありません。</p>`;
-    }
-  });
-}
-  
-onSnapshot(collection(db, "users"), (snapshot) => {
-  roomsList.innerHTML = "";
+    async function addPost() {
+      const titleInput = document.getElementById("postTitle");
+      const authorInput = document.getElementById("postAuthor");
+      const categoryInput = document.getElementById("postCategory");
+      const bodyInput = document.getElementById("postBody");
 
-  snapshot.forEach((docSnap) => {
-    const profile = docSnap.data();
-    const card = createUserRoomCard(profile, docSnap.id);
-    roomsList.appendChild(card);
-  });
-});
-  
-window.saveProfile = saveProfile;
-  
-window.signup = signup;
-window.login = login;
-window.logout = logout;
-  
-  window.addPost = addPost;
-</script>  
+      if (!currentUser) {
+        showError("投稿するにはログインしてください。");
+        return;
+      }
+
+      if (!hasDisplayName()) {
+        showError("投稿するにはプロフィールの表示名を保存してください。");
+        return;
+      }
+
+      const title = titleInput.value.trim();
+      const author = authorInput.value.trim();
+      const category = categoryInput.value;
+      const body = bodyInput.value.trim();
+
+      if (title === "" || body === "") {
+        showError("タイトルと本文を入力してね。");
+        return;
+      }
+
+      clearError();
+
+      const authorName = author || currentProfile.displayName || currentUser.email;
+
+      await addDoc(collection(db, "posts"), {
+        title,
+        category,
+        body,
+        author: authorName,
+        userId: currentUser.uid,
+        likes: 0,
+        likedBy: [],
+        createdAt: serverTimestamp()
+      });
+
+      titleInput.value = "";
+      authorInput.value = "";
+      bodyInput.value = "";
+
+      document.getElementById("posts").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    onAuthStateChanged(auth, async (user) => {
+      currentUser = user;
+
+      if (user) {
+        loginStatus.textContent = `ログイン中：${user.email}`;
+        authMessage.textContent = "";
+        await loadProfile(user);
+      } else {
+        loginStatus.textContent = "ログインしていません";
+        currentProfile = null;
+        updateMyRoom(null);
+
+        displayNameInput.value = "";
+        roomNameInput.value = "";
+        favoriteTopicInput.value = "";
+        bioInput.value = "";
+      }
+
+      renderPosts();
+    });
+
+    async function signup() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (email === "" || password === "") {
+        authMessage.textContent = "メールアドレスとパスワードを入力してください。";
+        return;
+      }
+
+      try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        authMessage.textContent = "新規登録しました。";
+      } catch (error) {
+        authMessage.textContent = error.message;
+      }
+    }
+
+    async function login() {
+      const email = emailInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      if (email === "" || password === "") {
+        authMessage.textContent = "メールアドレスとパスワードを入力してください。";
+        return;
+      }
+
+      try {
+        await signInWithEmailAndPassword(auth, email, password);
+        authMessage.textContent = "ログインしました。";
+      } catch (error) {
+        authMessage.textContent = error.message;
+      }
+    }
+
+    async function logout() {
+      await signOut(auth);
+      authMessage.textContent = "ログアウトしました。";
+    }
+
+    function updateMyRoom(profile) {
+      const myRoomName = document.getElementById("myRoomName");
+      const myDisplayName = document.getElementById("myDisplayName");
+      const myFavoriteTopic = document.getElementById("myFavoriteTopic");
+      const myBio = document.getElementById("myBio");
+
+      if (!profile) {
+        myRoomName.textContent = "まだ部屋がありません";
+        myDisplayName.textContent = "ログインすると表示されます";
+        myFavoriteTopic.textContent = "好きな話題：未設定";
+        myBio.textContent = "自己紹介：未設定";
+        return;
+      }
+
+      myRoomName.textContent = profile.roomName || "名前のない部屋";
+      myDisplayName.textContent = profile.displayName || "名無しの住人";
+      myFavoriteTopic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
+      myBio.textContent = `自己紹介：${profile.bio || "未設定"}`;
+    }
+
+    async function loadProfile(user) {
+      const profileRef = doc(db, "users", user.uid);
+      const profileSnap = await getDoc(profileRef);
+
+      if (profileSnap.exists()) {
+        const profile = profileSnap.data();
+        currentProfile = profile;
+
+        displayNameInput.value = profile.displayName || "";
+        roomNameInput.value = profile.roomName || "";
+        favoriteTopicInput.value = profile.favoriteTopic || "";
+        bioInput.value = profile.bio || "";
+        updateMyRoom(profile);
+      } else {
+        currentProfile = null;
+        updateMyRoom(null);
+      }
+    }
+
+    async function saveProfile() {
+      if (!currentUser) {
+        profileMessage.textContent = "プロフィールを保存するにはログインしてください。";
+        return;
+      }
+
+      const profile = {
+        displayName: displayNameInput.value.trim(),
+        roomName: roomNameInput.value.trim(),
+        favoriteTopic: favoriteTopicInput.value.trim(),
+        bio: bioInput.value.trim(),
+        email: currentUser.email,
+        updatedAt: serverTimestamp()
+      };
+
+      await setDoc(doc(db, "users", currentUser.uid), profile);
+
+      currentProfile = {
+        ...profile,
+        updatedAt: new Date()
+      };
+
+      updateMyRoom(currentProfile);
+      profileMessage.textContent = "プロフィールを保存しました。";
+      renderPosts();
+    }
+
+    function createUserRoomCard(profile, userId) {
+      const card = document.createElement("div");
+      card.className = "user-room-card";
+
+      const icon = document.createElement("div");
+      icon.className = "room-icon";
+      icon.textContent = "🏡";
+
+      const roomName = document.createElement("h3");
+      roomName.textContent = profile.roomName || "名前のない部屋";
+
+      const userName = document.createElement("div");
+      userName.className = "room-user";
+      userName.textContent = profile.displayName || "名無しの住人";
+
+      const topic = document.createElement("p");
+      topic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
+
+      const bio = document.createElement("p");
+      bio.textContent = profile.bio || "自己紹介はまだありません。";
+
+      card.appendChild(icon);
+      card.appendChild(roomName);
+      card.appendChild(userName);
+      card.appendChild(topic);
+      card.appendChild(bio);
+
+      card.onclick = () => {
+        showVisitedRoom(profile, userId);
+      };
+
+      return card;
+    }
+
+    function showVisitedRoom(profile, userId) {
+      const visitedRoomName = document.getElementById("visitedRoomName");
+      const visitedDisplayName = document.getElementById("visitedDisplayName");
+      const visitedFavoriteTopic = document.getElementById("visitedFavoriteTopic");
+      const visitedBio = document.getElementById("visitedBio");
+
+      currentVisitedUserId = userId;
+
+      visitedRoomName.textContent = profile.roomName || "名前のない部屋";
+      visitedDisplayName.textContent = profile.displayName || "名無しの住人";
+      visitedFavoriteTopic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
+      visitedBio.textContent = `自己紹介：${profile.bio || "未設定"}`;
+
+      loadVisitedUserPosts(userId);
+
+      document.getElementById("roomDetail").scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+
+    function loadVisitedUserPosts(userId) {
+      const visitedPostsList = document.getElementById("visitedPostsList");
+      visitedPostsList.innerHTML = "";
+
+      const userPosts = allPosts.filter(({ data }) => data.userId === userId);
+
+      if (userPosts.length === 0) {
+        visitedPostsList.innerHTML = `<p class="empty-visited-posts">この住人の投稿はまだありません。</p>`;
+        return;
+      }
+
+      userPosts.forEach(({ data }) => {
+        const postItem = document.createElement("div");
+        postItem.className = "visited-post-item";
+
+        const tag = document.createElement("span");
+        tag.className = "visited-post-tag";
+        tag.textContent = data.category || "雑談";
+
+        const title = document.createElement("h4");
+        title.textContent = data.title || "無題の投稿";
+
+        const body = document.createElement("p");
+        body.textContent = data.body || "";
+
+        postItem.appendChild(tag);
+        postItem.appendChild(title);
+        postItem.appendChild(body);
+
+        visitedPostsList.appendChild(postItem);
+      });
+    }
+
+    onSnapshot(collection(db, "users"), (snapshot) => {
+      roomsList.innerHTML = "";
+
+      snapshot.forEach((docSnap) => {
+        const profile = docSnap.data();
+
+        if (!profile.displayName && !profile.roomName && !profile.bio) {
+          return;
+        }
+
+        const card = createUserRoomCard(profile, docSnap.id);
+        roomsList.appendChild(card);
+      });
+    });
+
+    window.signup = signup;
+    window.login = login;
+    window.logout = logout;
+    window.saveProfile = saveProfile;
+    window.addPost = addPost;
+  </script>
 </body>
 </html>
