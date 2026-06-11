@@ -482,6 +482,39 @@
   color: #c94c4c;
 }
 
+    .my-room-card {
+  margin-top: 28px;
+  background: #fff;
+  border-radius: 30px;
+  padding: 32px;
+  border: 1px solid #f1dfd2;
+  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
+  text-align: center;
+}
+
+.room-icon {
+  font-size: 54px;
+  margin-bottom: 10px;
+}
+
+.my-room-card h3 {
+  color: #4a2f21;
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.room-owner {
+  color: #b8754a;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.my-room-card p {
+  color: #66554a;
+  margin-bottom: 8px;
+}
+    
+
 @media (max-width: 900px) {
   .auth-grid {
     grid-template-columns: 1fr;
@@ -691,6 +724,14 @@
         <strong>あなたの小さな部屋</strong>
         <p>好きなもの・話したいこと・今の気分を飾れる場所</p>
       </div>
+      
+      <div class="my-room-card" id="myRoomCard">
+  <div class="room-icon">🏡</div>
+  <h3 id="myRoomName">まだ部屋がありません</h3>
+  <p class="room-owner" id="myDisplayName">ログインすると表示されます</p>
+  <p id="myFavoriteTopic">好きな話題：未設定</p>
+  <p id="myBio">自己紹介：未設定</p>
+</div>
     </div>
   </section>
 
@@ -1005,6 +1046,26 @@ const favoriteTopicInput = document.getElementById("favoriteTopicInput");
 const bioInput = document.getElementById("bioInput");
 const profileMessage = document.getElementById("profileMessage");
 
+  function updateMyRoom(profile) {
+  const myRoomName = document.getElementById("myRoomName");
+  const myDisplayName = document.getElementById("myDisplayName");
+  const myFavoriteTopic = document.getElementById("myFavoriteTopic");
+  const myBio = document.getElementById("myBio");
+
+  if (!profile) {
+    myRoomName.textContent = "まだ部屋がありません";
+    myDisplayName.textContent = "ログインすると表示されます";
+    myFavoriteTopic.textContent = "好きな話題：未設定";
+    myBio.textContent = "自己紹介：未設定";
+    return;
+  }
+
+  myRoomName.textContent = profile.roomName || "名前のない部屋";
+  myDisplayName.textContent = profile.displayName || "名無しの住人";
+  myFavoriteTopic.textContent = `好きな話題：${profile.favoriteTopic || "未設定"}`;
+  myBio.textContent = `自己紹介：${profile.bio || "未設定"}`;
+}
+  
 async function loadProfile(user) {
   const profileRef = doc(db, "users", user.uid);
   const profileSnap = await getDoc(profileRef);
@@ -1017,9 +1078,11 @@ async function loadProfile(user) {
     roomNameInput.value = profile.roomName || "";
     favoriteTopicInput.value = profile.favoriteTopic || "";
     bioInput.value = profile.bio || "";
-  } else {
-    currentProfile = null;
-  }
+    updateMyRoom(profile);
+} else {
+  currentProfile = null;
+  updateMyRoom(null);
+}
 }
 
 async function saveProfile() {
@@ -1044,6 +1107,8 @@ async function saveProfile() {
   bio: bioInput.value.trim(),
   email: currentUser.email
 };
+
+  updateMyRoom(currentProfile);
   
   profileMessage.textContent = "プロフィールを保存しました。";
 }
