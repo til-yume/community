@@ -157,12 +157,12 @@
       text-align: center;
     }
 
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 220px;
-      gap: 16px;
-      margin-bottom: 16px;
-    }
+ .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 220px;
+  gap: 16px;
+  margin-bottom: 16px;
+}
 
     input,
     select,
@@ -398,10 +398,11 @@
     <div class="form-box">
       <h3>村の掲示板に投稿する</h3>
 
-      <div class="form-grid">
-        <input type="text" id="postTitle" placeholder="投稿タイトルを入力" />
+<div class="form-grid">
+  <input type="text" id="postTitle" placeholder="投稿タイトルを入力" />
+  <input type="text" id="postAuthor" placeholder="名前を入力" />
 
-        <select id="postCategory">
+  <select id="postCategory">
           <option value="雑談">雑談</option>
           <option value="相談">相談</option>
           <option value="好きなもの">好きなもの</option>
@@ -535,12 +536,14 @@
 
   async function addPost() {
     const titleInput = document.getElementById("postTitle");
-    const categoryInput = document.getElementById("postCategory");
-    const bodyInput = document.getElementById("postBody");
+const authorInput = document.getElementById("postAuthor");
+const categoryInput = document.getElementById("postCategory");
+const bodyInput = document.getElementById("postBody");
 
-    const title = titleInput.value.trim();
-    const category = categoryInput.value;
-    const body = bodyInput.value.trim();
+const title = titleInput.value.trim();
+const author = authorInput.value.trim() || "匿名";
+const category = categoryInput.value;
+const body = bodyInput.value.trim();
 
     if (title === "" || body === "") {
       errorMessage.style.display = "block";
@@ -553,13 +556,14 @@
       title: title,
       category: category,
       body: body,
-      author: "あなた",
+ author: author,
       createdAt: serverTimestamp()
     });
 
     titleInput.value = "";
     bodyInput.value = "";
-
+authorInput.value = "";
+    
     document.getElementById("posts").scrollIntoView({
       behavior: "smooth"
     });
