@@ -292,6 +292,59 @@
 .like-button:hover {
   background: #f6d8c2;
 }
+
+.comment-box {
+  margin-top: 18px;
+  padding-top: 16px;
+  border-top: 1px solid #f1dfd2;
+}
+
+.comment-title {
+  font-size: 13px;
+  font-weight: bold;
+  color: #8b5e3c;
+  margin-bottom: 10px;
+}
+
+.comment-list {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.comment-item {
+  background: #fff8f1;
+  border-radius: 14px;
+  padding: 8px 12px;
+  color: #66554a;
+  font-size: 13px;
+}
+
+.comment-input-wrap {
+  display: grid;
+  grid-template-columns: 1fr 70px;
+  gap: 8px;
+}
+
+.comment-input {
+  padding: 10px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+}
+
+.comment-button {
+  border: none;
+  border-radius: 999px;
+  background: #d98c5f;
+  color: #fff;
+  font-size: 13px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.comment-button:hover {
+  opacity: 0.9;
+}
     
     .room {
       background: #fff;
@@ -551,19 +604,19 @@ function createPostCard(post, postId) {
   const body = document.createElement("p");
   body.textContent = post.body || "";
 
-const meta = document.createElement("div");
-meta.className = "post-meta";
-meta.textContent = `💬 0　by ${post.author || "匿名"}`;
+  const meta = document.createElement("div");
+  meta.className = "post-meta";
+  meta.textContent = `by ${post.author || "匿名"}`;
 
-const likeButton = document.createElement("button");
-likeButton.className = "like-button";
-likeButton.textContent = `♡ ${post.likes || 0}`;
+  const likeButton = document.createElement("button");
+  likeButton.className = "like-button";
+  likeButton.textContent = `♡ ${post.likes || 0}`;
 
-likeButton.onclick = async () => {
-  await updateDoc(doc(db, "posts", postId), {
-    likes: increment(1)
-  });
-};
+  likeButton.onclick = async () => {
+    await updateDoc(doc(db, "posts", postId), {
+      likes: increment(1)
+    });
+  };
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "削除";
@@ -578,12 +631,78 @@ likeButton.onclick = async () => {
     await deleteDoc(doc(db, "posts", postId));
   };
 
-postCard.appendChild(tag);
-postCard.appendChild(title);
-postCard.appendChild(body);
-postCard.appendChild(meta);
-postCard.appendChild(likeButton);
-postCard.appendChild(deleteButton);
+  const commentBox = document.createElement("div");
+  commentBox.className = "comment-box";
+
+  const commentTitle = document.createElement("div");
+  commentTitle.className = "comment-title";
+  commentTitle.textContent = "コメント";
+
+  const commentList = document.createElement("div");
+  commentList.className = "comment-list";
+  commentList.id = `comments-${postId}`;
+
+  const commentInputWrap = document.createElement("div");
+  commentInputWrap.className = "comment-input-wrap";
+
+  const commentInput = document.createElement("input");
+  commentInput.type = "text";
+  commentInput.placeholder = "コメントを書く";
+  commentInput.className = "comment-input";
+  commentInput.id = `comment-input-${postId}`;
+
+  const commentButton = document.createElement("button");
+  commentButton.textContent = "送信";
+  commentButton.className = "comment-button";
+  commentButton.onclick = async () => {
+    const commentText = commentInput.value.trim();
+
+    if (commentText === "") {
+      return;
+    }
+
+    await addDoc(collection(db, "posts", postId, "comments"), {
+      text: commentText,
+      author: "匿名",
+      createdAt: serverTimestamp()
+    });
+
+    commentInput.value = "";
+  };
+
+  commentInputWrap.appendChild(commentInput);
+  commentInputWrap.appendChild(commentButton);
+
+  commentBox.appendChild(commentTitle);
+  commentBox.appendChild(commentList);
+  commentBox.appendChild(commentInputWrap);
+
+  const commentsQuery = query(
+    collection(db, "posts", postId, "comments"),
+    orderBy("createdAt", "asc")
+  );
+
+  onSnapshot(commentsQuery, (snapshot) => {
+    commentList.innerHTML = "";
+
+    snapshot.forEach((document) => {
+      const comment = document.data();
+
+      const commentItem = document.createElement("div");
+      commentItem.className = "comment-item";
+      commentItem.textContent = `${comment.author || "匿名"}：${comment.text || ""}`;
+
+      commentList.appendChild(commentItem);
+    });
+  });
+
+  postCard.appendChild(tag);
+  postCard.appendChild(title);
+  postCard.appendChild(body);
+  postCard.appendChild(meta);
+  postCard.appendChild(likeButton);
+  postCard.appendChild(deleteButton);
+  postCard.appendChild(commentBox);
 
   return postCard;
 }
