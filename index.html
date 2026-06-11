@@ -653,7 +653,8 @@ import {
   query,
   orderBy,
   updateDoc,
-  increment
+  increment,
+  arrayUnion
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   import {
@@ -704,11 +705,24 @@ function createPostCard(post, postId) {
   likeButton.className = "like-button";
   likeButton.textContent = `♡ ${post.likes || 0}`;
 
-  likeButton.onclick = async () => {
-    await updateDoc(doc(db, "posts", postId), {
-      likes: increment(1)
-    });
-  };
+likeButton.onclick = async () => {
+  if (!currentUser) {
+    alert("いいねするにはログインしてください。");
+    return;
+  }
+
+  const likedBy = post.likedBy || [];
+
+  if (likedBy.includes(currentUser.uid)) {
+    alert("この投稿にはすでにいいねしています。");
+    return;
+  }
+
+  await updateDoc(doc(db, "posts", postId), {
+    likes: increment(1),
+    likedBy: arrayUnion(currentUser.uid)
+  });
+};
 
   const deleteButton = document.createElement("button");
   deleteButton.textContent = "削除";
@@ -846,9 +860,10 @@ await addDoc(collection(db, "posts"), {
   title: title,
   category: category,
   body: body,
-author: author || currentUser.email,
-userId: currentUser.uid,
+  author: author || currentUser.email,
+  userId: currentUser.uid,
   likes: 0,
+  likedBy: [],
   createdAt: serverTimestamp()
 });
 
