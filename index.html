@@ -353,6 +353,23 @@
       font-size: 13px;
     }
 
+    .report-button {
+  margin-top: 14px;
+  margin-right: 8px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #fff6e8;
+  color: #9a6743;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.report-button:hover {
+  background: #f7dfbd;
+}
+    
     .like-button:hover {
       background: #f6d8c2;
     }
@@ -956,19 +973,55 @@
         await deleteDoc(doc(db, "posts", postId));
       };
 
+      const reportButton = document.createElement("button");
+reportButton.textContent = "通報";
+reportButton.className = "report-button";
+
+reportButton.onclick = async () => {
+  if (!currentUser) {
+    alert("通報するにはログインしてください。");
+    return;
+  }
+
+  const reason = prompt("通報理由を入力してください。");
+
+  if (!reason || reason.trim() === "") {
+    return;
+  }
+
+  await addDoc(collection(db, "reports"), {
+    type: "post",
+    postId: postId,
+    postTitle: post.title || "",
+    postBody: post.body || "",
+    postAuthor: post.author || "",
+    reportedBy: currentUser.uid,
+    reporterEmail: currentUser.email,
+    reason: reason.trim(),
+    status: "未対応",
+    createdAt: serverTimestamp()
+  });
+
+  alert("通報を受け付けました。");
+};
+      
       const commentBox = createCommentBox(postId);
 
-      postCard.appendChild(tag);
-      postCard.appendChild(title);
-      postCard.appendChild(body);
-      postCard.appendChild(meta);
-      postCard.appendChild(likeButton);
+postCard.appendChild(tag);
+postCard.appendChild(title);
+postCard.appendChild(body);
+postCard.appendChild(meta);
+postCard.appendChild(likeButton);
 
-      if (currentUser && post.userId === currentUser.uid) {
-        postCard.appendChild(deleteButton);
-      }
+if (currentUser) {
+  postCard.appendChild(reportButton);
+}
 
-      postCard.appendChild(commentBox);
+if (currentUser && post.userId === currentUser.uid) {
+  postCard.appendChild(deleteButton);
+}
+
+postCard.appendChild(commentBox);
 
       return postCard;
     }
