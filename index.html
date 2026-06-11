@@ -739,6 +739,7 @@ const db = getFirestore(app);
 const auth = getAuth(app);
 
 let currentUser = null;
+let currentProfile = null;
 
   const postList = document.getElementById("postList");
   const errorMessage = document.getElementById("errorMessage");
@@ -834,7 +835,7 @@ commentButton.onclick = async () => {
 
   await addDoc(collection(db, "posts", postId, "comments"), {
     text: commentText,
-    author: currentUser.email,
+ author: currentProfile?.displayName || currentUser.email,
     userId: currentUser.uid,
     createdAt: serverTimestamp()
   });
@@ -920,7 +921,7 @@ await addDoc(collection(db, "posts"), {
   title: title,
   category: category,
   body: body,
-  author: author || currentUser.email,
+ author: author || currentProfile?.displayName || currentUser.email,
   userId: currentUser.uid,
   likes: 0,
   likedBy: [],
@@ -948,9 +949,10 @@ onAuthStateChanged(auth, (user) => {
     loginStatus.textContent = `ログイン中：${user.email}`;
     authMessage.textContent = "";
     loadProfile(user);
-  } else {
-    loginStatus.textContent = "ログインしていません";
-  }
+} else {
+  loginStatus.textContent = "ログインしていません";
+  currentProfile = null;
+}
 });
 
 async function signup() {
@@ -1004,11 +1006,14 @@ async function loadProfile(user) {
 
   if (profileSnap.exists()) {
     const profile = profileSnap.data();
+    currentProfile = profile;
 
     displayNameInput.value = profile.displayName || "";
     roomNameInput.value = profile.roomName || "";
     favoriteTopicInput.value = profile.favoriteTopic || "";
     bioInput.value = profile.bio || "";
+  } else {
+    currentProfile = null;
   }
 }
 
