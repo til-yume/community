@@ -260,6 +260,22 @@
       color: #9a887c;
     }
 
+    .delete-button {
+  margin-top: 14px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #f4e1d5;
+  color: #8b5e3c;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background: #e8c8b5;
+}
+    
     .room {
       background: #fff;
       border-radius: 30px;
@@ -475,13 +491,15 @@
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
-  import {
-    getFirestore,
-    collection,
-    addDoc,
-    onSnapshot,
-    serverTimestamp
-  } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
+import {
+  getFirestore,
+  collection,
+  addDoc,
+  onSnapshot,
+  serverTimestamp,
+  deleteDoc,
+  doc
+} from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyDyaR0-4UNVRBQYRUqohS0pl9EaVjIoo",
@@ -498,40 +516,54 @@
   const postList = document.getElementById("postList");
   const errorMessage = document.getElementById("errorMessage");
 
-  function createPostCard(post) {
-    const postCard = document.createElement("div");
-    postCard.className = "post-card";
+function createPostCard(post, postId) {
+  const postCard = document.createElement("div");
+  postCard.className = "post-card";
 
-    const tag = document.createElement("span");
-    tag.className = "post-tag";
-    tag.textContent = post.category || "雑談";
+  const tag = document.createElement("span");
+  tag.className = "post-tag";
+  tag.textContent = post.category || "雑談";
 
-    const title = document.createElement("h3");
-    title.textContent = post.title || "無題の投稿";
+  const title = document.createElement("h3");
+  title.textContent = post.title || "無題の投稿";
 
-    const body = document.createElement("p");
-    body.textContent = post.body || "";
+  const body = document.createElement("p");
+  body.textContent = post.body || "";
 
-    const meta = document.createElement("div");
-    meta.className = "post-meta";
-    meta.textContent = `♡ 0　💬 0　by ${post.author || "あなた"}`;
+  const meta = document.createElement("div");
+  meta.className = "post-meta";
+  meta.textContent = `♡ 0　💬 0　by ${post.author || "匿名"}`;
 
-    postCard.appendChild(tag);
-    postCard.appendChild(title);
-    postCard.appendChild(body);
-    postCard.appendChild(meta);
+  const deleteButton = document.createElement("button");
+  deleteButton.textContent = "削除";
+  deleteButton.className = "delete-button";
+  deleteButton.onclick = async () => {
+    const result = confirm("この投稿を削除しますか？");
 
-    return postCard;
-  }
+    if (!result) {
+      return;
+    }
+
+    await deleteDoc(doc(db, "posts", postId));
+  };
+
+  postCard.appendChild(tag);
+  postCard.appendChild(title);
+  postCard.appendChild(body);
+  postCard.appendChild(meta);
+  postCard.appendChild(deleteButton);
+
+  return postCard;
+}
 
   onSnapshot(collection(db, "posts"), (snapshot) => {
     postList.innerHTML = "";
 
-    snapshot.forEach((doc) => {
-      const post = doc.data();
-      const postCard = createPostCard(post);
-      postList.prepend(postCard);
-    });
+snapshot.forEach((document) => {
+  const post = document.data();
+  const postCard = createPostCard(post, document.id);
+  postList.prepend(postCard);
+});
   });
 
   async function addPost() {
