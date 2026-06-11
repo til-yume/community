@@ -498,7 +498,9 @@ import {
   onSnapshot,
   serverTimestamp,
   deleteDoc,
-  doc
+  doc,
+  query,
+  orderBy
 } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
   const firebaseConfig = {
@@ -556,15 +558,20 @@ function createPostCard(post, postId) {
   return postCard;
 }
 
-  onSnapshot(collection(db, "posts"), (snapshot) => {
-    postList.innerHTML = "";
+const postsQuery = query(
+  collection(db, "posts"),
+  orderBy("createdAt", "desc")
+);
 
-snapshot.forEach((document) => {
-  const post = document.data();
-  const postCard = createPostCard(post, document.id);
-  postList.prepend(postCard);
-});
+onSnapshot(postsQuery, (snapshot) => {
+  postList.innerHTML = "";
+
+  snapshot.forEach((document) => {
+    const post = document.data();
+    const postCard = createPostCard(post, document.id);
+    postList.appendChild(postCard);
   });
+});
 
   async function addPost() {
     const titleInput = document.getElementById("postTitle");
