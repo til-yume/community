@@ -614,6 +614,81 @@
       font-size: 13px;
     }
 
+    .admin-box {
+  background: #fff;
+  border-radius: 30px;
+  padding: 30px;
+  border: 1px solid #f1dfd2;
+  box-shadow: 0 10px 28px rgba(90, 60, 40, 0.08);
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.admin-box h3 {
+  text-align: center;
+  color: #4a2f21;
+  font-size: 22px;
+  margin-bottom: 18px;
+}
+
+.reports-list {
+  display: grid;
+  gap: 14px;
+}
+
+.report-card {
+  background: #fff8f1;
+  border: 1px solid #f1dfd2;
+  border-radius: 18px;
+  padding: 18px;
+}
+
+.report-card h4 {
+  color: #4a2f21;
+  font-size: 16px;
+  margin-bottom: 8px;
+}
+
+.report-card p {
+  color: #66554a;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.report-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #fff1e6;
+  color: #b8754a;
+  font-size: 12px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.report-done-button {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border: none;
+  border-radius: 999px;
+  background: #d98c5f;
+  color: #fff;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.report-done-button:hover {
+  opacity: 0.9;
+}
+
+.empty-reports {
+  text-align: center;
+  color: #9a887c;
+  font-size: 14px;
+}
+    
+
     @media (max-width: 900px) {
       header {
         padding: 16px 5%;
@@ -843,9 +918,21 @@
     </div>
   </section>
 
+  <section class="section admin-section" id="adminPanel" style="display: none;">
+  <h2>管理画面</h2>
+  <p class="section-lead">管理者だけが通報内容を確認できます。</p>
+
+  <div class="admin-box">
+    <h3>通報一覧</h3>
+    <div class="reports-list" id="reportsList">
+      <p class="empty-reports">通報はまだありません。</p>
+    </div>
+  </div>
+</section>
+  
   <footer>
     © 2026 Community. All rights reserved.
-  </footer>
+ </footer>
 
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
@@ -892,6 +979,8 @@
     let allPosts = [];
     let currentVisitedUserId = null;
 
+    const ADMIN_EMAILS = ["tanu2.com@icloud.com"];
+    
     const postList = document.getElementById("postList");
     const errorMessage = document.getElementById("errorMessage");
     const emailInput = document.getElementById("emailInput");
@@ -919,6 +1008,10 @@
       return Boolean(currentProfile && currentProfile.displayName && currentProfile.displayName.trim());
     }
 
+    function isAdmin() {
+  return currentUser && ADMIN_EMAILS.includes(currentUser.email);
+}
+    
     function createPostCard(post, postId) {
       const postCard = document.createElement("div");
       postCard.className = "post-card";
@@ -1226,6 +1319,7 @@ postCard.appendChild(commentBox);
       }
 
       renderPosts();
+      toggleAdminPanel();
     });
 
     async function signup() {
@@ -1435,6 +1529,93 @@ postCard.appendChild(commentBox);
       });
     });
 
+    function toggleAdminPanel() {
+  const adminPanel = document.getElementById("adminPanel");
+
+  if (!adminPanel) {
+    return;
+  }
+
+  if (isAdmin()) {
+    adminPanel.style.display = "block";
+    loadReports();
+  } else {
+    adminPanel.style.display = "none";
+  }
+}
+
+function loadReports() {
+  if (!isAdmin()) {
+    return;
+  }
+
+  const reportsList = document.getElementById("reportsList");
+
+  const reportsQuery = query(
+    collection(db, "reports"),
+    orderBy("createdAt", "desc")
+  );
+
+  onSnapshot(reportsQuery, (snapshot) => {
+    reportsList.innerHTML = "";
+
+    if (snapshot.empty) {
+      reportsList.innerHTML = `<p class="empty-reports">通報はまだありません。</p>`;
+      return;
+    }
+
+    snapshot.forEach((docSnap) => {
+      const report = docSnap.data();
+
+      const reportCard = document.createElement("div");
+      reportCard.className = "report-card";
+
+      const status = document.createElement("span");
+      status.className = "report-status";
+      status.textContent = report.status || "未対応";
+
+      const title = document.createElement("h4");
+      title.textContent = `通報対象：${report.postTitle || "無題の投稿"}`;
+
+      const reason = document.createElement("p");
+      reason.textContent = `理由：${report.reason || ""}`;
+
+      const author = document.createElement("p");
+      author.textContent = `投稿者：${report.postAuthor || "不明"}`;
+
+      const reporter = document.createElement("p");
+      reporter.textContent = `通報者：${report.reporterEmail || "不明"}`;
+
+      const body = document.createElement("p");
+      body.textContent = `投稿内容：${report.postBody || ""}`;
+
+      reportCard.appendChild(status);
+      reportCard.appendChild(title);
+      reportCard.appendChild(reason);
+      reportCard.appendChild(author);
+      reportCard.appendChild(reporter);
+      reportCard.appendChild(body);
+
+      if (report.status !== "対応済み") {
+        const doneButton = document.createElement("button");
+        doneButton.className = "report-done-button";
+        doneButton.textContent = "対応済みにする";
+
+        doneButton.onclick = async () => {
+          await updateDoc(doc(db, "reports", docSnap.id), {
+            status: "対応済み",
+            handledAt: serverTimestamp()
+          });
+        };
+
+        reportCard.appendChild(doneButton);
+      }
+
+      reportsList.appendChild(reportCard);
+    });
+  });
+}
+    
     window.signup = signup;
     window.login = login;
     window.logout = logout;
