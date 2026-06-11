@@ -472,44 +472,100 @@
     © 2026 Community. All rights reserved.
   </footer>
 
-  <script>
-    function addPost() {
-      const titleInput = document.getElementById("postTitle");
-      const categoryInput = document.getElementById("postCategory");
-      const bodyInput = document.getElementById("postBody");
-      const errorMessage = document.getElementById("errorMessage");
-      const postList = document.getElementById("postList");
+<script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-app.js";
+  import {
+    getFirestore,
+    collection,
+    addDoc,
+    onSnapshot,
+    serverTimestamp
+  } from "https://www.gstatic.com/firebasejs/12.14.0/firebase-firestore.js";
 
-      const title = titleInput.value.trim();
-      const category = categoryInput.value;
-      const body = bodyInput.value.trim();
+  const firebaseConfig = {
+    apiKey: "AIzaSyDyaR0-4UNVRBQYRUqohS0pl9EaVjIoo",
+    authDomain: "community-test-d5f53.firebaseapp.com",
+    projectId: "community-test-d5f53",
+    storageBucket: "community-test-d5f53.firebasestorage.app",
+    messagingSenderId: "190626713279",
+    appId: "1:190626713279:web:a9ec8d787c71f0878fc00a"
+  };
 
-      if (title === "" || body === "") {
-        errorMessage.style.display = "block";
-        return;
-      }
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
 
-      errorMessage.style.display = "none";
+  const postList = document.getElementById("postList");
+  const errorMessage = document.getElementById("errorMessage");
 
-      const postCard = document.createElement("div");
-      postCard.className = "post-card";
+  function createPostCard(post) {
+    const postCard = document.createElement("div");
+    postCard.className = "post-card";
 
-      postCard.innerHTML = `
-        <span class="post-tag">${category}</span>
-        <h3>${title}</h3>
-        <p>${body}</p>
-        <div class="post-meta">♡ 0　💬 0　by あなた</div>
-      `;
+    const tag = document.createElement("span");
+    tag.className = "post-tag";
+    tag.textContent = post.category || "雑談";
 
+    const title = document.createElement("h3");
+    title.textContent = post.title || "無題の投稿";
+
+    const body = document.createElement("p");
+    body.textContent = post.body || "";
+
+    const meta = document.createElement("div");
+    meta.className = "post-meta";
+    meta.textContent = `♡ 0　💬 0　by ${post.author || "あなた"}`;
+
+    postCard.appendChild(tag);
+    postCard.appendChild(title);
+    postCard.appendChild(body);
+    postCard.appendChild(meta);
+
+    return postCard;
+  }
+
+  onSnapshot(collection(db, "posts"), (snapshot) => {
+    postList.innerHTML = "";
+
+    snapshot.forEach((doc) => {
+      const post = doc.data();
+      const postCard = createPostCard(post);
       postList.prepend(postCard);
+    });
+  });
 
-      titleInput.value = "";
-      bodyInput.value = "";
+  async function addPost() {
+    const titleInput = document.getElementById("postTitle");
+    const categoryInput = document.getElementById("postCategory");
+    const bodyInput = document.getElementById("postBody");
 
-      document.getElementById("posts").scrollIntoView({
-        behavior: "smooth"
-      });
+    const title = titleInput.value.trim();
+    const category = categoryInput.value;
+    const body = bodyInput.value.trim();
+
+    if (title === "" || body === "") {
+      errorMessage.style.display = "block";
+      return;
     }
-  </script>
+
+    errorMessage.style.display = "none";
+
+    await addDoc(collection(db, "posts"), {
+      title: title,
+      category: category,
+      body: body,
+      author: "あなた",
+      createdAt: serverTimestamp()
+    });
+
+    titleInput.value = "";
+    bodyInput.value = "";
+
+    document.getElementById("posts").scrollIntoView({
+      behavior: "smooth"
+    });
+  }
+
+  window.addPost = addPost;
+</script>  
 </body>
 </html>
